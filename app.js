@@ -3,8 +3,8 @@
 // ===========================
 // STATE
 // ===========================
-let allCards   = [];          // loaded from cards.json
-let activeFilter = null;      // null = no filter (show all shuffled)
+let allCards     = [];     // loaded from cards.json
+let activeFilter = null;   // null = no filter (show all shuffled)
 let currentTheme = localStorage.getItem('sprtk-theme') || 'dark';
 
 // ===========================
@@ -42,13 +42,69 @@ function navigateTo(pageId) {
 }
 
 // ===========================
-// CARD BUILDING
+// CARD MEDIA BUILDING
 // ===========================
-function buildMediaWrap(card, isDetail = false) {
-  const wrap = document.createElement('div');
-  wrap.className = isDetail ? 'detail-media' : `card-media${card.size === 'tall' ? ' tall' : card.size === 'wide' ? ' wide' : ''}`;
 
-  const fallback = () => {
+/**
+ * Build the card preview media element.
+ * - Video cards: show previewSrc image if provided, else use a video
+ *   element with poster to capture first frame, else fallback gradient.
+ * - Image cards: standard <img>.
+ */
+function buildCardPreview(card) {
+  const wrap = document.createElement('div');
+  wrap.className = `card-media${card.size === 'tall' ? ' tall' : card.size === 'wide' ? ' wide' : ''}`;
+
+  const applyFallback = () => {
+    wrap.style.background = card.fallbackGradient;
+    const fb = document.createElement('div');
+    fb.className = 'card-media-fallback';
+    fb.textContent = card.fallbackEmoji;
+    wrap.appendChild(fb);
+  };
+
+  if (card.mediaType === 'video') {
+    if (card.previewSrc) {
+      // Explicit preview image provided
+      const img = document.createElement('img');
+      img.src    = card.previewSrc;
+      img.alt    = card.title;
+      img.loading = 'lazy';
+      img.onerror = applyFallback;
+      wrap.appendChild(img);
+    } else {
+      // No previewSrc — use a video element with preload="metadata"
+      // so the browser surfaces the first frame as a visual preview.
+      const v = document.createElement('video');
+      v.src      = card.mediaSrc;
+      v.preload  = 'metadata';
+      v.muted    = true;
+      v.playsInline = true;
+      // Seek to 0.1 s after metadata loads so browsers paint a frame
+      v.addEventListener('loadedmetadata', () => { v.currentTime = 0.1; }, { once: true });
+      v.onerror  = applyFallback;
+      wrap.appendChild(v);
+    }
+  } else {
+    const img = document.createElement('img');
+    img.src    = card.mediaSrc;
+    img.alt    = card.title;
+    img.loading = 'lazy';
+    img.onerror = applyFallback;
+    wrap.appendChild(img);
+  }
+
+  return wrap;
+}
+
+/**
+ * Build the detail-page media element (always the real video/image).
+ */
+function buildDetailMedia(card) {
+  const wrap = document.createElement('div');
+  wrap.className = 'detail-media';
+
+  const applyFallback = () => {
     wrap.style.background = card.fallbackGradient;
     const fb = document.createElement('div');
     fb.className = 'card-media-fallback';
@@ -59,50 +115,55 @@ function buildMediaWrap(card, isDetail = false) {
 
   if (card.mediaType === 'video') {
     const v = document.createElement('video');
-    v.src = card.mediaSrc;
-    v.muted = true;
-    v.loop = true;
+    v.src        = card.mediaSrc;
+    v.controls   = true;
+    v.muted      = true;
     v.playsInline = true;
-    if (isDetail) { v.controls = true; v.autoplay = true; }
-    v.loading = 'lazy';
-    v.onerror = fallback;
+    v.onerror    = applyFallback;
     wrap.appendChild(v);
   } else {
     const img = document.createElement('img');
-    img.src = card.mediaSrc;
-    img.alt = card.title;
-    img.loading = 'lazy';
-    img.onerror = fallback;
+    img.src    = card.mediaSrc;
+    img.alt    = card.title;
+    img.onerror = applyFallback;
     wrap.appendChild(img);
   }
 
   return wrap;
 }
 
+// ===========================
+// CARD ELEMENT BUILDING
+// ===========================
 function buildCard(card, delay = 0) {
   const el = document.createElement('article');
   el.className = 'card';
   el.style.animationDelay = `${delay}s`;
+  if (card.mediaType === 'video') el.classList.add('card--video');
 
-  // Media + overlays
-  const mediaWrap = buildMediaWrap(card);
+  // Preview media
+  const mediaWrap = buildCardPreview(card);
 
-  const catPill = document.createElement('span');
-  catPill.className = 'card-category';
-  catPill.textContent = card.categoryLabel;
-  mediaWrap.appendChild(catPill);
-
+  // Subtle hover overlay (no CTA button, no category pill)
   const overlay = document.createElement('div');
   overlay.className = 'card-overlay';
-  const cta = document.createElement('span');
-  cta.className = 'card-overlay-cta';
-  cta.textContent = 'Подробнее →';
-  overlay.appendChild(cta);
-  mediaWrap.appendChild(overlay);
 
+  // Play icon — only for video cards
+  if (card.mediaType === 'video') {
+    const playIcon = document.createElement('div');
+    playIcon.className = 'card-play-icon';
+    playIcon.innerHTML = `
+      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="24" cy="24" r="23" stroke="white" stroke-width="1.5" fill="rgba(0,0,0,0.35)"/>
+        <polygon points="19,14 37,24 19,34" fill="white"/>
+      </svg>`;
+    overlay.appendChild(playIcon);
+  }
+
+  mediaWrap.appendChild(overlay);
   el.appendChild(mediaWrap);
 
-  // Body
+  // Compact body
   const body = document.createElement('div');
   body.className = 'card-body';
 
@@ -118,7 +179,7 @@ function buildCard(card, delay = 0) {
   body.appendChild(desc);
   el.appendChild(body);
 
-  // Click / keyboard
+  // Interaction
   el.setAttribute('role', 'button');
   el.setAttribute('tabindex', '0');
   el.addEventListener('click', () => openDetail(card.id));
@@ -130,8 +191,6 @@ function buildCard(card, delay = 0) {
 // ===========================
 // MASONRY HELPERS
 // ===========================
-
-/** Read the column count the CSS wants via the --cols custom property */
 function getColCount() {
   const grid = document.getElementById('cardsGrid');
   const raw  = getComputedStyle(grid).getPropertyValue('--cols').trim();
@@ -139,18 +198,12 @@ function getColCount() {
   return (isNaN(n) || n < 1) ? 4 : n;
 }
 
-/**
- * Build (or rebuild) the masonry column structure inside #cardsGrid.
- * Cards are placed into the shortest column each time, giving tight
- * vertical packing with no row-gap artefacts.
- */
 function buildMasonryColumns(cards) {
   const grid = document.getElementById('cardsGrid');
   grid.innerHTML = '';
 
   const colCount = getColCount();
 
-  // Create column wrappers
   const cols = Array.from({ length: colCount }, () => {
     const col = document.createElement('div');
     col.className = 'masonry-col';
@@ -158,24 +211,21 @@ function buildMasonryColumns(cards) {
     return col;
   });
 
-  // Track approximate pixel height per column for shortest-column insertion
   const heights = new Array(colCount).fill(0);
 
   cards.forEach((card, i) => {
-    // Find the shortest column
     const shortest = heights.indexOf(Math.min(...heights));
-
     const el = buildCard(card, i * 0.04);
     cols[shortest].appendChild(el);
 
-    // Estimate card height: media aspect-ratio + fixed body (~88px)
-    const BODY_H = 88;
+    // Estimated card height for column-balance calculation
+    const BODY_H = 82;   // compact body height (with red line + padding)
     const GAP    = 16;
     const colW   = cols[shortest].getBoundingClientRect().width || 300;
     let mediaH;
-    if (card.size === 'tall')  mediaH = colW * (5 / 4);
-    else if (card.size === 'wide') mediaH = colW * (9 / 21);
-    else                       mediaH = colW * (10 / 16);
+    if (card.size === 'tall')       mediaH = colW * (4 / 3);   // 3/4 ratio
+    else if (card.size === 'wide')  mediaH = colW * (9 / 16);  // 16/9 ratio
+    else                            mediaH = colW * (3 / 4);   // 4/3 ratio (default)
 
     heights[shortest] += mediaH + BODY_H + GAP;
   });
@@ -185,14 +235,17 @@ function buildMasonryColumns(cards) {
 // RENDER CARDS
 // ===========================
 function renderCards() {
-  // Decide source order
   let source;
-  if (!activeFilter || activeFilter === 'all') {
-    // No filter → show all, shuffled
+
+  if (!activeFilter) {
+    // No filter selected → show all, shuffled
     source = shuffle(allCards);
+  } else if (activeFilter === 'all') {
+    // "Последнее" → original JSON order, no shuffle
+    source = [...allCards];
   } else {
-    // Filter active → stable JSON order, no shuffle
-    source = allCards.filter(c => c.category === activeFilter);
+    // Category filter → shuffle the filtered subset
+    source = shuffle(allCards.filter(c => c.category === activeFilter));
   }
 
   buildMasonryColumns(source);
@@ -212,7 +265,7 @@ function applyFilter(filter) {
 }
 
 // ===========================
-// DETAIL
+// DETAIL PAGE
 // ===========================
 function openDetail(id) {
   const card = allCards.find(c => c.id === id);
@@ -221,10 +274,10 @@ function openDetail(id) {
   const content = document.getElementById('detailContent');
   content.innerHTML = '';
 
-  // Large media
-  content.appendChild(buildMediaWrap(card, true));
+  // Real media (video plays here)
+  content.appendChild(buildDetailMedia(card));
 
-  // Category
+  // Category tag (kept on detail page)
   const meta = document.createElement('div');
   meta.className = 'detail-meta';
   const catTag = document.createElement('span');
@@ -233,13 +286,11 @@ function openDetail(id) {
   meta.appendChild(catTag);
   content.appendChild(meta);
 
-  // Title
   const title = document.createElement('h2');
   title.className = 'detail-title';
   title.textContent = card.title;
   content.appendChild(title);
 
-  // Full description
   const desc = document.createElement('p');
   desc.className = 'detail-desc';
   desc.textContent = card.fullDesc;
@@ -269,29 +320,25 @@ async function loadCards() {
 function init() {
   applyTheme(currentTheme);
 
-  // Theme toggle
   document.getElementById('themeToggle').addEventListener('click', () => {
     applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
   });
 
-  // Nav tabs
   document.querySelectorAll('.nav-tab').forEach(tab => {
     tab.addEventListener('click', () => navigateTo(tab.dataset.page));
   });
 
-  // Filter buttons — no filter active by default
   document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      // Clicking the already-active filter clears it (show all shuffled)
+      // Clicking active filter clears it (back to random all)
       const next = btn.dataset.filter === activeFilter ? null : btn.dataset.filter;
       applyFilter(next);
     });
   });
 
-  // Back button
   document.getElementById('backBtn').addEventListener('click', () => navigateTo('explore'));
 
-  // Reflow masonry when container width changes (breakpoint crossings)
+  // Reflow masonry on breakpoint change
   let lastCols = 0;
   const ro = new ResizeObserver(() => {
     if (!allCards.length) return;
@@ -303,7 +350,6 @@ function init() {
   });
   ro.observe(document.getElementById('cardsGrid'));
 
-  // Load card data from JSON
   loadCards();
 }
 
