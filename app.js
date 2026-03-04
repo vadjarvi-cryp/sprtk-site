@@ -3,23 +3,20 @@
 // ═══════════════════════════════════════════════════════
 //  CONFIGURATION
 // ═══════════════════════════════════════════════════════
-const BATCH_SIZE          = 12;   // cards per lazy-load page
-const AUTOPLAY_THRESHOLD  = 0.60; // 60 % visible to trigger preview video
+const BATCH_SIZE         = 12;
+const AUTOPLAY_THRESHOLD = 0.60; // 60 % of card visible → play preview video
 
 // ═══════════════════════════════════════════════════════
 //  STATE
 // ═══════════════════════════════════════════════════════
-let allCards      = [];   // full dataset from cards.json
-let activeFilter  = null; // null = all shuffled | 'all' = JSON order | category key
-let currentTheme  = localStorage.getItem('sprtk-theme') || 'dark';
+let allCards     = [];
+let activeFilter = null;  // null = all shuffled | 'all' = JSON order | category
+let currentTheme = localStorage.getItem('sprtk-theme') || 'dark';
 
-// Lazy-load pagination
-let filteredSource = []; // current ordered array for the active filter
-let renderedCount  = 0;  // how many cards are already in the DOM
+let filteredSource = [];  // ordered array for the active filter
+let renderedCount  = 0;   // cards already in the DOM
 
-// Observer handles (kept so we can .disconnect() cleanly on reset)
 let autoplayObserver = null;
-let sentinelObserver = null;
 
 // ═══════════════════════════════════════════════════════
 //  UTILS
@@ -56,64 +53,47 @@ function navigateTo(pageId) {
 }
 
 // ═══════════════════════════════════════════════════════
-//  VIEWPORT AUTOPLAY — one shared IntersectionObserver
-//  watching every .card-media[data-video-card] element
+//  VIEWPORT AUTOPLAY
 // ═══════════════════════════════════════════════════════
-
-/**
- * Create (or recreate) the single shared autoplay observer.
- * Must be called before any card-media elements are registered.
- */
 function createAutoplayObserver() {
   if (autoplayObserver) autoplayObserver.disconnect();
 
   autoplayObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      const wrap = entry.target;          // .card-media element
-      const card = wrap._card;           // attached in buildCardPreview()
+      const wrap = entry.target;
+      const card = wrap._card;
+      if (!card || card.mediaType !== 'video' || !card.previewVideo) return;
 
-      if (!card) return;
+      const v = wrap.querySelector('.card-preview-video');
 
       if (entry.intersectionRatio >= AUTOPLAY_THRESHOLD) {
-        // ── Card is ≥60 % visible ───────────────────────────────────────
         if (!wrap._videoMounted) {
-          mountPreviewVideo(wrap, card);  // first time: inject <video>
-        } else {
-          const v = wrap.querySelector('.card-preview-video');
-          if (v && v.paused) {
-            v.play().catch(() => {});
-          }
+          mountPreviewVideo(wrap, card);
+        } else if (v && v.paused) {
+          v.play().catch(() => {});
         }
       } else {
-        // ── Card exited viewport ────────────────────────────────────────
-        const v = wrap.querySelector('.card-preview-video');
         if (v) {
           v.pause();
-          // Fully out of view → free the network connection
           if (entry.intersectionRatio === 0) {
-            v.classList.remove('is-playing');
+            // Fully offscreen — free network connection, allow remount
             v.removeAttribute('src');
-            v.load(); // abort pending request
+            v.load();
             wrap._videoMounted = false;
           }
         }
       }
     });
-  }, {
-    // Fire at 0 % (fully left) and at the autoplay threshold
-    threshold: [0, AUTOPLAY_THRESHOLD]
-  });
+  }, { threshold: [0, AUTOPLAY_THRESHOLD] });
 }
 
 /**
- * Inject a muted looping <video> into the card media wrapper, then
- * crossfade it over the static previewImage once the first frame is ready.
- * No-ops silently if previewVideo is empty.
+ * Mount the preview video.
+ * Strategy: video (z-index 1) plays underneath; image (z-index 2) fades out
+ * once the video has its first frame ready. Clean, no flash.
  */
 function mountPreviewVideo(wrap, card) {
-  if (!card.previewVideo) return; // no loop clip → stay as static image
-
-  // Guard against double-mount on rapid scrolling
+  if (!card.previewVideo || wrap._videoMounted) return;
   wrap._videoMounted = true;
 
   const img     = wrap.querySelector('.card-preview-img');
@@ -124,50 +104,38 @@ function mountPreviewVideo(wrap, card) {
   v.muted       = true;
   v.loop        = true;
   v.playsInline = true;
-  v.preload     = 'none';
+  v.preload     = 'auto'; // we want it to load promptly once visible
   v.setAttribute('playsinline', '');
 
-  // Insert before overlay so z-order is: img → video → overlay
+  // Insert BEFORE overlay so stacking is: img(z2) → video(z1) → overlay(z-index from CSS)
   wrap.insertBefore(v, overlay || null);
 
   v.onerror = () => {
-    // Network / codec error — quietly keep the static image
     v.remove();
     wrap._videoMounted = false;
   };
 
-  // Assign src AFTER element creation so preload="none" is honoured
   v.src = card.previewVideo;
 
+  // When first frame is ready: play video, then fade the static image away
   v.addEventListener('canplay', () => {
-    v.play()
-      .then(() => {
-        v.classList.add('is-playing'); // fade in the video
-        if (img) {
-          // Fade out and remove the static image
-          img.style.opacity = '0';
-          img.addEventListener('transitionend', () => img.remove(), { once: true });
-        }
-      })
-      .catch(() => {});
+    v.play().catch(() => {});
+    if (img) {
+      img.style.opacity = '0';
+      img.addEventListener('transitionend', () => img.remove(), { once: true });
+    }
   }, { once: true });
 }
 
-/**
- * Register a .card-media wrapper with the shared autoplay observer.
- * Only called for video-type cards.
- */
 function watchCardMedia(wrap, card) {
   wrap._card = card;
-  autoplayObserver.observe(wrap);
+  if (autoplayObserver) autoplayObserver.observe(wrap);
 }
 
 // ═══════════════════════════════════════════════════════
-//  CARD MEDIA BUILDERS
+//  FALLBACK
 // ═══════════════════════════════════════════════════════
-
 function applyFallback(wrap, card) {
-  // Don't add twice (e.g. if img and video both error)
   if (wrap.querySelector('.card-media-fallback')) return;
   wrap.style.background = card.fallbackGradient;
   const fb = document.createElement('div');
@@ -176,18 +144,9 @@ function applyFallback(wrap, card) {
   wrap.appendChild(fb);
 }
 
-/**
- * Build the card grid preview wrapper.
- *
- * Video cards
- *   • Render a static <img class="card-preview-img"> using previewImage.
- *   • The autoplay observer upgrades it to a looping <video> when ≥60 % visible.
- *   • No previewImage  → fallback gradient immediately.
- *   • No previewVideo  → static image only, never autoplays.
- *
- * Image cards
- *   • Standard lazy <img>.
- */
+// ═══════════════════════════════════════════════════════
+//  CARD PREVIEW MEDIA
+// ═══════════════════════════════════════════════════════
 function buildCardPreview(card) {
   const sizeClass = card.size === 'tall' ? ' tall'
                   : card.size === 'wide' ? ' wide' : '';
@@ -195,6 +154,7 @@ function buildCardPreview(card) {
   wrap.className = `card-media${sizeClass}`;
 
   if (card.mediaType === 'video') {
+    // Show static previewImage immediately
     if (card.previewImage) {
       const img = document.createElement('img');
       img.className = 'card-preview-img';
@@ -204,14 +164,12 @@ function buildCardPreview(card) {
       img.onerror   = () => applyFallback(wrap, card);
       wrap.appendChild(img);
     } else {
-      // No static thumbnail at all
       applyFallback(wrap, card);
     }
-    // Register for viewport-based autoplay (only if there's a loop clip)
+    // Register with autoplay observer (video mounts when ≥60 % visible)
     if (card.previewVideo) watchCardMedia(wrap, card);
 
   } else {
-    // Plain image card
     const img = document.createElement('img');
     img.src     = card.mediaSrc;
     img.alt     = card.title;
@@ -223,11 +181,9 @@ function buildCardPreview(card) {
   return wrap;
 }
 
-/**
- * Build the detail-page media block.
- * Always uses fullVideo (never the loop clip).
- * User controls playback via native controls.
- */
+// ═══════════════════════════════════════════════════════
+//  DETAIL MEDIA — never cropped, always contain
+// ═══════════════════════════════════════════════════════
 function buildDetailMedia(card) {
   const wrap = document.createElement('div');
   wrap.className = 'detail-media';
@@ -235,9 +191,9 @@ function buildDetailMedia(card) {
   const fallback = () => {
     wrap.style.background = card.fallbackGradient;
     const fb = document.createElement('div');
-    fb.className = 'card-media-fallback';
-    fb.style.cssText = 'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:3.5rem;';
-    fb.textContent   = card.fallbackEmoji;
+    fb.className   = 'card-media-fallback';
+    fb.style.cssText = 'display:flex;align-items:center;justify-content:center;min-height:200px;font-size:3.5rem;';
+    fb.textContent = card.fallbackEmoji;
     wrap.appendChild(fb);
   };
 
@@ -247,12 +203,10 @@ function buildDetailMedia(card) {
       const v = document.createElement('video');
       v.src         = src;
       v.controls    = true;
-      v.muted       = false; // user-facing: allow sound
       v.playsInline = true;
       v.onerror     = fallback;
       wrap.appendChild(v);
     } else if (card.previewImage) {
-      // fullVideo absent – at least show the thumbnail
       const img = document.createElement('img');
       img.src     = card.previewImage;
       img.alt     = card.title;
@@ -273,7 +227,7 @@ function buildDetailMedia(card) {
 }
 
 // ═══════════════════════════════════════════════════════
-//  CARD DOM BUILDER
+//  CARD BUILDER
 // ═══════════════════════════════════════════════════════
 function buildCard(card, animDelay = 0) {
   const el = document.createElement('article');
@@ -281,14 +235,11 @@ function buildCard(card, animDelay = 0) {
   el.style.animationDelay = `${animDelay}s`;
   if (card.mediaType === 'video') el.classList.add('card--video');
 
-  // Media preview wrapper (registers autoplay observer internally)
   const mediaWrap = buildCardPreview(card);
 
-  // Hover overlay
   const overlay = document.createElement('div');
   overlay.className = 'card-overlay';
 
-  // Play icon — video cards only
   if (card.mediaType === 'video') {
     const playIcon = document.createElement('div');
     playIcon.className = 'card-play-icon';
@@ -303,7 +254,6 @@ function buildCard(card, animDelay = 0) {
   mediaWrap.appendChild(overlay);
   el.appendChild(mediaWrap);
 
-  // Text body
   const body = document.createElement('div');
   body.className = 'card-body';
 
@@ -319,7 +269,6 @@ function buildCard(card, animDelay = 0) {
   body.appendChild(desc);
   el.appendChild(body);
 
-  // Interaction
   el.setAttribute('role', 'button');
   el.setAttribute('tabindex', '0');
   el.addEventListener('click',   ()  => openDetail(card.id));
@@ -329,7 +278,7 @@ function buildCard(card, animDelay = 0) {
 }
 
 // ═══════════════════════════════════════════════════════
-//  MASONRY LAYOUT
+//  MASONRY
 // ═══════════════════════════════════════════════════════
 function getColCount() {
   const grid = document.getElementById('cardsGrid');
@@ -338,49 +287,35 @@ function getColCount() {
   return (isNaN(n) || n < 1) ? 4 : n;
 }
 
-/** Estimated rendered height of one card (used for column-balance arithmetic) */
 function estimatedCardHeight(card, colW) {
-  const BODY_H = 82;
-  const GAP    = 16;
+  const BODY_H = 82, GAP = 16;
   let mediaH;
-  if      (card.size === 'tall') mediaH = colW * (4 / 3);  // 3/4 portrait
-  else if (card.size === 'wide') mediaH = colW * (9 / 16); // 16/9 landscape
-  else                           mediaH = colW * (3 / 4);  // 4/3 default
+  if      (card.size === 'tall') mediaH = colW * (4 / 3);
+  else if (card.size === 'wide') mediaH = colW * (9 / 16);
+  else                           mediaH = colW * (3 / 4);
   return mediaH + BODY_H + GAP;
 }
 
-/**
- * Append a batch of card objects into the existing masonry columns,
- * placing each card into the currently shortest column.
- * Does NOT clear the grid — call resetGrid() first when starting over.
- */
 function appendBatch(batch) {
   const grid = document.getElementById('cardsGrid');
   const cols = Array.from(grid.querySelectorAll('.masonry-col'));
   if (!cols.length) return;
 
-  // Seed heights from real DOM so new cards join in the right column
   const heights = cols.map(c => c.getBoundingClientRect().height || 0);
   const colW    = cols[0].getBoundingClientRect().width || 300;
 
   batch.forEach((card, i) => {
     const minIdx = heights.indexOf(Math.min(...heights));
-    const el     = buildCard(card, i * 0.04);
-    cols[minIdx].appendChild(el);
+    cols[minIdx].appendChild(buildCard(card, i * 0.04));
     heights[minIdx] += estimatedCardHeight(card, colW);
   });
 }
 
-/**
- * Tear down the grid completely and rebuild the correct number of
- * empty .masonry-col elements, ready for the first appendBatch() call.
- */
 function resetGrid() {
-  // Disconnect autoplay observer so out-going video elements release resources
   if (autoplayObserver) autoplayObserver.disconnect();
-  createAutoplayObserver(); // fresh observer for the new batch
+  createAutoplayObserver();
 
-  const grid     = document.getElementById('cardsGrid');
+  const grid = document.getElementById('cardsGrid');
   grid.innerHTML = '';
   const colCount = getColCount();
   for (let i = 0; i < colCount; i++) {
@@ -391,70 +326,62 @@ function resetGrid() {
 }
 
 // ═══════════════════════════════════════════════════════
-//  LAZY LOAD — sentinel-based infinite scroll
+//  LOAD MORE BUTTON
 // ═══════════════════════════════════════════════════════
-
-function removeSentinel() {
-  if (sentinelObserver) { sentinelObserver.disconnect(); sentinelObserver = null; }
-  document.getElementById('sprtk-sentinel')?.remove();
+function removeLoadMoreBtn() {
+  document.getElementById('sprtk-load-more-wrap')?.remove();
 }
 
-/**
- * Insert a 1 px sentinel element immediately after #cardsGrid.
- * When it enters the viewport (300 px root-margin = pre-fetch buffer),
- * the next batch of cards is appended.
- */
-function attachSentinel() {
-  removeSentinel();
-  if (renderedCount >= filteredSource.length) return; // nothing left to load
+function updateLoadMoreBtn() {
+  removeLoadMoreBtn();
+  if (renderedCount >= filteredSource.length) return; // all shown
 
-  const sentinel = document.createElement('div');
-  sentinel.id    = 'sprtk-sentinel';
-  document.getElementById('cardsGrid').insertAdjacentElement('afterend', sentinel);
+  const remaining = filteredSource.length - renderedCount;
 
-  sentinelObserver = new IntersectionObserver((entries) => {
-    if (entries[0].isIntersecting) loadNextBatch();
-  }, { rootMargin: '300px' });
+  const wrap = document.createElement('div');
+  wrap.id        = 'sprtk-load-more-wrap';
+  wrap.className = 'load-more-wrap';
 
-  sentinelObserver.observe(sentinel);
+  const btn = document.createElement('button');
+  btn.className   = 'load-more-btn';
+  btn.textContent = `Показать ещё (${remaining})`;
+  btn.addEventListener('click', loadMoreCards);
+
+  wrap.appendChild(btn);
+  document.getElementById('cardsGrid').insertAdjacentElement('afterend', wrap);
 }
 
-/** Render the next BATCH_SIZE cards from filteredSource */
-function loadNextBatch() {
+function loadMoreCards() {
   const batch = filteredSource.slice(renderedCount, renderedCount + BATCH_SIZE);
-  if (!batch.length) { removeSentinel(); return; }
+  if (!batch.length) { removeLoadMoreBtn(); return; }
 
   appendBatch(batch);
   renderedCount += batch.length;
-  attachSentinel(); // re-attach (or remove if exhausted)
+  updateLoadMoreBtn();
 }
 
 // ═══════════════════════════════════════════════════════
 //  RENDER / FILTER
 // ═══════════════════════════════════════════════════════
-
 function computeSource() {
   if (!activeFilter) {
-    return shuffle(allCards);                                           // no filter → shuffled all
+    return shuffle(allCards);
   } else if (activeFilter === 'all') {
-    return [...allCards];                                               // "Последнее" → JSON order
+    return [...allCards];
   } else {
-    return shuffle(allCards.filter(c => c.category === activeFilter)); // category → shuffled subset
+    return shuffle(allCards.filter(c => c.category === activeFilter));
   }
 }
 
-/**
- * Full render — called on initial load, filter change, or column-count change.
- * Resets pagination and starts from batch 0.
- */
 function renderCards() {
-  removeSentinel();
+  removeLoadMoreBtn();
   resetGrid();
 
   filteredSource = computeSource();
   renderedCount  = 0;
 
-  loadNextBatch(); // first BATCH_SIZE cards appear immediately
+  // Render first batch immediately
+  loadMoreCards();
 }
 
 function applyFilter(filter) {
@@ -518,8 +445,6 @@ async function loadCards() {
 // ═══════════════════════════════════════════════════════
 function init() {
   applyTheme(currentTheme);
-
-  // Create the autoplay observer early so it exists before loadCards()
   createAutoplayObserver();
 
   document.getElementById('themeToggle').addEventListener('click', () => {
@@ -532,7 +457,6 @@ function init() {
 
   document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      // Clicking the active filter again → clear it (back to shuffled all)
       const next = btn.dataset.filter === activeFilter ? null : btn.dataset.filter;
       applyFilter(next);
     });
@@ -540,14 +464,14 @@ function init() {
 
   document.getElementById('backBtn').addEventListener('click', () => navigateTo('explore'));
 
-  // Reflow masonry when the viewport crosses a CSS breakpoint
+  // Reflow masonry on breakpoint change
   let lastColCount = 0;
   const resizeObs = new ResizeObserver(() => {
     if (!allCards.length) return;
     const newCount = getColCount();
     if (newCount !== lastColCount) {
       lastColCount = newCount;
-      renderCards(); // full re-render with correct column count
+      renderCards();
     }
   });
   resizeObs.observe(document.getElementById('cardsGrid'));

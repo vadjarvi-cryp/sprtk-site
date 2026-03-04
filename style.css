@@ -514,17 +514,30 @@ body {
   border-radius: var(--radius-card);
   overflow: hidden;
   margin-bottom: 28px;
-  aspect-ratio: 16/9;
-  background: var(--bg-secondary);
-  position: relative;
+  /* No fixed height or aspect-ratio — media dictates its own size */
+  background: #0d0d10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.detail-media img,
-.detail-media video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.detail-media img {
   display: block;
+  width: 100%;
+  height: auto;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: var(--radius-card);
 }
+.detail-media video {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 80vh;
+  object-fit: contain;
+  background: #000;
+  border-radius: var(--radius-card);
+}
+[data-theme="light"] .detail-media { background: #e4e4ea; }
 
 .detail-meta { margin-bottom: 14px; }
 
@@ -643,19 +656,37 @@ body::after {
 }
 
 /* ===========================
-   LAZY LOAD SENTINEL
+   LOAD MORE BUTTON
 =========================== */
-#sprtk-sentinel {
-  height: 1px;
-  width: 100%;
-  pointer-events: none;
+.load-more-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 32px 0 8px;
+}
+.load-more-btn {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 13px 40px;
+  border: 1.5px solid var(--border);
+  border-radius: 50px;
+  background: var(--filter-bg);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.load-more-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: 0 4px 18px var(--accent-glow);
 }
 
 /* ===========================
    CARD VIDEO CROSSFADE
 =========================== */
-/* Preview image and preview video sit in the same space;
-   the video fades in over the image when it's ready */
+/* Both preview-img and preview-video fill the card-media box absolutely */
 .card-media .card-preview-img,
 .card-media .card-preview-video {
   position: absolute;
@@ -666,24 +697,14 @@ body::after {
   display: block;
 }
 
-/* The wrapper needs relative positioning so absolute children work */
-.card-media {
-  position: relative;
-}
-
-/* Image starts fully visible; JS fades it out when video is ready */
+/* Image on top (z-index 2), fades out when video takes over */
 .card-media .card-preview-img {
+  z-index: 2;
   transition: opacity 0.45s ease;
-  z-index: 1;
 }
 
-/* Video starts transparent, sits behind image, JS shows it */
+/* Video below image (z-index 1), always playing once mounted */
 .card-media .card-preview-video {
-  z-index: 0;
-  opacity: 0;
-  transition: opacity 0.45s ease;
-}
-
-.card-media .card-preview-video.is-playing {
-  opacity: 1;
+  z-index: 1;
+  opacity: 1; /* always visible — image fades out over it */
 }
