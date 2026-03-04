@@ -15,13 +15,11 @@
 <header class="site-header">
   <div class="header-inner">
 
-    <!-- Logo — left -->
     <div class="logo-wrap">
       <span class="logo-dot" aria-hidden="true"></span>
       <span class="logo">SPRTK</span>
     </div>
 
-    <!-- Nav + toggle — right -->
     <div class="header-right">
       <nav class="main-nav" role="navigation">
         <button class="nav-tab active" data-page="explore">Explore</button>
@@ -29,6 +27,7 @@
         <button class="nav-tab" data-page="schedule">Расписание</button>
         <button class="nav-tab" data-page="shop">Магазин</button>
         <button class="nav-tab" data-page="training">Персональный тренинг</button>
+        <button class="nav-tab" data-page="account">Личный кабинет</button>
       </nav>
       <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему">
         <span class="toggle-icon sun">☀</span>
@@ -44,7 +43,6 @@
 
   <!-- EXPLORE -->
   <section class="page active" id="page-explore">
-
     <div class="hero">
       <div class="hero-glow" aria-hidden="true"></div>
       <h1 class="hero-headline">
@@ -52,7 +50,7 @@
         <span class="hero-accent">возможности</span><br>
         спортивного комплекса
       </h1>
-	<p class="hero-sub">Тренируем с 1972</p>
+      <p class="hero-sub">Тренируем с 1972</p>
     </div>
 
     <div class="filters-bar">
@@ -97,8 +95,8 @@
         <h2 class="embed-title">Расписание</h2>
         <p class="embed-subtitle">Актуальное расписание занятий</p>
       </div>
-      <div class="widget-placeholder" >
-        <iframe id="personal_widget_frame_cn8" src="https://mobifitness.ru/schedule-widget/?code=667017&amp;type=schedule&amp;club=0&amp;host=mobifitness.ru&amp;storagePrefix=storage.&amp;version=v6&amp;direction=0&amp;group=0&amp;activity=0&amp;trainer=0&amp;room=0&amp;age=&amp;level=&amp;year=0&amp;week=0&amp;icons=&amp;test=0&amp;debug=0&amp;desc=&amp;scheduleOpenAt=&amp;section=&amp;filterClub=0&amp;filterActivity=0&amp;filterTrainer=0&amp;language=&amp;shopAuth=0&amp;metrics=%7B%22http_referer%22%3A%22https%3A%2F%2Fsk-spartak.ru%2F%22%7D&amp;parent=https://sk-spartak.ru/raspisanie_online?mfw_cn8" style="min-width: 100%; width: 100%;" scrolling="no" width="100%" height="10311.5" frameborder="0"></iframe>
+      <div class="widget-container">
+        <div id="mf_schedule_widget_cont_g76"></div>
       </div>
     </div>
   </section>
@@ -110,25 +108,34 @@
         <h2 class="embed-title">Магазин</h2>
         <p class="embed-subtitle">Спортивные товары и аксессуары</p>
       </div>
-      <div class="widget-placeholder">
-        <div class="placeholder-icon">🛒</div>
-        <p>Здесь будет размещён внешний виджет</p>
-        <span class="placeholder-tag">Shop Widget</span>
+      <div class="widget-container">
+        <div id="mf_shop_widget_cont_859"></div>
       </div>
     </div>
   </section>
 
-  <!-- ТРЕНИНГ -->
+  <!-- ПЕРСОНАЛЬНЫЙ ТРЕНИНГ -->
   <section class="page" id="page-training">
     <div class="embed-page-container">
       <div class="embed-header">
         <h2 class="embed-title">Персональный тренинг</h2>
         <p class="embed-subtitle">Тренировки с персональным тренером</p>
       </div>
-      <div class="widget-placeholder">
-        <div class="placeholder-icon">💪</div>
-        <p>Здесь будет размещён внешний виджет</p>
-        <span class="placeholder-tag">Training Widget</span>
+      <div class="widget-container">
+        <div id="mf_personalBook_widget_cont_8gd"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ЛИЧНЫЙ КАБИНЕТ -->
+  <section class="page" id="page-account">
+    <div class="embed-page-container">
+      <div class="embed-header">
+        <h2 class="embed-title">Личный кабинет</h2>
+        <p class="embed-subtitle">Управление абонементом и записями</p>
+      </div>
+      <div class="widget-container">
+        <div id="mf_personal_widget_cont_tnl"></div>
       </div>
     </div>
   </section>
@@ -136,5 +143,47 @@
 </main>
 
 <script src="app.js"></script>
+
+<!-- Mobifitness widgets -->
+<script type="text/javascript" async="async" id="mobifitness_personal_widget_script_g76"
+  src="//mobifitness.ru/personal-widget/js/code.js"
+  data-div="mf_schedule_widget_cont_g76"
+  data-test="0" data-debug="0"
+  data-domain="mobifitness.ru"
+  data-code="667017"
+  data-version="v6"
+  data-type="schedule"
+  data-language=""></script>
+
+<script type="text/javascript" async="async" id="mobifitness_personal_widget_script_859"
+  src="//mobifitness.ru/personal-widget/js/code.js"
+  data-div="mf_shop_widget_cont_859"
+  data-test="0" data-debug="0"
+  data-domain="mobifitness.ru"
+  data-code="667017"
+  data-version="v6"
+  data-type="shop"
+  data-language=""></script>
+
+<script type="text/javascript" async="async" id="mobifitness_personal_widget_script_tnl"
+  src="//mobifitness.ru/personal-widget/js/code.js"
+  data-div="mf_personal_widget_cont_tnl"
+  data-test="0" data-debug="0"
+  data-domain="mobifitness.ru"
+  data-code="667017"
+  data-version="v6"
+  data-type="personal"
+  data-language=""></script>
+
+<script type="text/javascript" async="async" id="mobifitness_personal_widget_script_8gd"
+  src="//mobifitness.ru/personal-widget/js/code.js"
+  data-div="mf_personalBook_widget_cont_8gd"
+  data-test="0" data-debug="0"
+  data-domain="mobifitness.ru"
+  data-code="667017"
+  data-version="v6"
+  data-type="personalBook"
+  data-language=""></script>
+
 </body>
 </html>

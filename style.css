@@ -398,8 +398,11 @@ body {
   display: block;
   transition: transform 0.55s cubic-bezier(0.4,0,0.2,1);
 }
-.card:hover .card-media img,
-.card:hover .card-media video { transform: scale(1.06); }
+/* Zoom only on image cards; video cards stay still */
+.card:not(.card--video):hover .card-media img { transform: scale(1.06); }
+/* Video cards: no zoom, no scale */
+.card--video:hover .card-media img,
+.card--video:hover .card-media video { transform: none; }
 
 .card-media-fallback {
   width: 100%;
@@ -410,11 +413,12 @@ body {
   font-size: 3.5rem;
 }
 
-/* ---- Hover overlay (no CTA button, no category pill) ---- */
+/* ---- Hover overlay ---- */
+/* Image cards: classic bottom-shadow vignette */
 .card-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.55) 100%);
+  background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.50) 100%);
   opacity: 0;
   transition: opacity var(--transition);
   z-index: 1;
@@ -422,25 +426,13 @@ body {
   align-items: center;
   justify-content: center;
 }
-.card:hover .card-overlay { opacity: 1; }
+.card:not(.card--video):hover .card-overlay { opacity: 1; }
 
-/* ---- Play icon for video cards ---- */
-.card-play-icon {
-  opacity: 0;
-  transform: scale(0.8);
-  transition: opacity 0.28s ease, transform 0.28s ease;
-  z-index: 2;
-  pointer-events: none;
+/* Video cards: subtle uniform lightening, no bottom shadow */
+.card--video .card-overlay {
+  background: rgba(255,255,255,0.06);
 }
-.card-play-icon svg {
-  width: 56px;
-  height: 56px;
-  filter: drop-shadow(0 2px 12px rgba(0,0,0,0.5));
-}
-.card:hover .card-play-icon {
-  opacity: 1;
-  transform: scale(1);
-}
+.card--video:hover .card-overlay { opacity: 1; }
 
 /* ---- Compact card body ---- */
 .card-body {
@@ -568,14 +560,19 @@ body {
 }
 
 /* ===========================
-   EMBED PAGES
+   EMBED / WIDGET PAGES
 =========================== */
 .embed-page-container {
-  padding: 0 px 0;
-  max-width: 1200px;
-  margin: 0 100px;
+  padding: 48px 0 80px;
+  width: 100%;
 }
-.embed-header { margin-bottom: 36px; }
+
+.embed-header {
+  max-width: 1200px;
+  margin: 0 auto 40px;
+  padding: 0 28px;
+}
+
 .embed-title {
   font-family: var(--font-display);
   font-size: clamp(2.5rem, 6vw, 4.2rem);
@@ -585,26 +582,43 @@ body {
 }
 .embed-subtitle { font-size: 0.95rem; color: var(--text-secondary); }
 
-.widget-placeholder {
-  background: var(--placeholder-bg);
-  border: 2px dashed var(--border);
+/* Full-width widget wrapper — no border, no padding, clean background */
+.widget-container {
+  width: 100%;
+  background: var(--bg-secondary);
   border-radius: var(--radius-card);
-  padding: 0px 0px;
+  overflow: hidden;
+  min-height: 300px;
+}
+
+/* Placeholder shown while widget loads or on О нас page */
+.widget-placeholder {
+  background: var(--bg-secondary);
+  border: 1.5px dashed var(--border);
+  border-radius: var(--radius-card);
+  padding: 60px 24px;
   text-align: center;
   transition: border-color var(--transition);
+  max-width: 1200px;
+  margin: 0 auto;
 }
 .widget-placeholder:hover { border-color: var(--accent); }
 .placeholder-icon { font-size: 3.5rem; margin-bottom: 16px; }
-.widget-placeholder p { font-size: 1rem; color: var(--text-secondary); margin-bottom: 16px; }
+.widget-placeholder p { font-size: 1rem; color: var(--text-secondary); margin-bottom: 20px; }
 .placeholder-tag {
   font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  padding: 5px 14px;
+  padding: 6px 16px;
   border-radius: 50px;
   background: var(--accent);
   color: #fff;
+}
+
+@media (max-width: 700px) {
+  .embed-header { padding: 0 16px; }
+  .embed-page-container { padding: 32px 0 60px; }
 }
 
 /* ===========================

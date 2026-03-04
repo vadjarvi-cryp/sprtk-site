@@ -4,7 +4,7 @@
 //  CONFIGURATION
 // ═══════════════════════════════════════════════════════
 const BATCH_SIZE         = 12;
-const AUTOPLAY_THRESHOLD = 0.60; // 60 % of card visible → play preview video
+const AUTOPLAY_THRESHOLD = 0.70; // 70 % of card visible → play preview video
 
 // ═══════════════════════════════════════════════════════
 //  STATE
@@ -70,10 +70,8 @@ function navigateTo(pageId) {
 function createAutoplayObserver() {
   if (autoplayObserver) autoplayObserver.disconnect();
 
-  // Use a fine-grained threshold array so the observer fires at every 10 %
-  // interval — this means a card scrolled to any level below 60 % will
-  // reliably trigger a pause, not just when it hits exactly 0 %.
-  const thresholds = Array.from({ length: 11 }, (_, i) => i / 10);
+  // Fine-grained thresholds so we catch every crossing point
+  const thresholds = Array.from({ length: 21 }, (_, i) => i / 20);
 
   autoplayObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -81,28 +79,17 @@ function createAutoplayObserver() {
       const card = wrap._card;
       if (!card || card.mediaType !== 'video' || !card.previewVideo) return;
 
-      const v = wrap.querySelector('.card-preview-video');
-
       if (entry.intersectionRatio >= AUTOPLAY_THRESHOLD) {
-        // Card is sufficiently visible — play
+        // ── Enough of the card is visible: show video ──────────────────
         if (!wrap._videoMounted) {
           mountPreviewVideo(wrap, card);
-        } else if (v && v.paused) {
-          v.play().catch(() => {});
+        } else {
+          const v = wrap.querySelector('.card-preview-video');
+          if (v && v.paused) v.play().catch(() => {});
         }
       } else {
-        // Card is less than 60 % visible — pause
-        if (v && !v.paused) {
-          v.pause();
-        }
-        // Fully offscreen — also release the network connection
-        if (entry.intersectionRatio === 0 && wrap._videoMounted) {
-          if (v) {
-            v.removeAttribute('src');
-            v.load();
-          }
-          wrap._videoMounted = false;
-        }
+        // ── Card is partially or fully out of view: restore image ──────
+        unmountPreviewVideo(wrap, card);
       }
     });
   }, { threshold: thresholds });
@@ -138,14 +125,50 @@ function mountPreviewVideo(wrap, card) {
 
   v.src = card.previewVideo;
 
-  // When first frame is ready: play video, then fade the static image away
+  // When first frame is ready: play video, then fade the static image to invisible
+  // (don't remove it — unmountPreviewVideo restores it by setting opacity back to 1)
   v.addEventListener('canplay', () => {
     v.play().catch(() => {});
     if (img) {
       img.style.opacity = '0';
-      img.addEventListener('transitionend', () => img.remove(), { once: true });
+      // Mark it as hidden but keep it in DOM for restoration
+      img.dataset.hidden = '1';
     }
   }, { once: true });
+}
+
+/**
+ * Tear down the preview video and restore the static previewImage.
+ * Called whenever the card drops below the autoplay threshold.
+ */
+function unmountPreviewVideo(wrap, card) {
+  if (!wrap._videoMounted) return;
+
+  const v = wrap.querySelector('.card-preview-video');
+  if (v) {
+    v.pause();
+    v.removeAttribute('src');
+    v.load(); // abort any pending network request
+    v.remove();
+  }
+  wrap._videoMounted = false;
+
+  // Restore the static preview image (was kept in DOM at opacity 0)
+  const img = wrap.querySelector('.card-preview-img');
+  if (img) {
+    img.style.opacity = '1';
+    delete img.dataset.hidden;
+  } else if (card.previewImage) {
+    // Image was never added (card had no previewImage at build time — shouldn't happen, but be safe)
+    const overlay = wrap.querySelector('.card-overlay');
+    const newImg = document.createElement('img');
+    newImg.className = 'card-preview-img';
+    newImg.src       = card.previewImage;
+    newImg.alt       = card.title;
+    newImg.loading   = 'lazy';
+    newImg.onerror   = () => applyFallback(wrap, card);
+    wrap.insertBefore(newImg, overlay || null);
+  }
 }
 
 function watchCardMedia(wrap, card) {
@@ -261,16 +284,7 @@ function buildCard(card, animDelay = 0) {
   const overlay = document.createElement('div');
   overlay.className = 'card-overlay';
 
-  if (card.mediaType === 'video') {
-    const playIcon = document.createElement('div');
-    playIcon.className = 'card-play-icon';
-    playIcon.innerHTML = `
-      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="23" stroke="white" stroke-width="1.5" fill="rgba(0,0,0,0.35)"/>
-        <polygon points="19,14 37,24 19,34" fill="white"/>
-      </svg>`;
-    overlay.appendChild(playIcon);
-  }
+  // No play icon — video cards use subtle lightening overlay only
 
   mediaWrap.appendChild(overlay);
   el.appendChild(mediaWrap);
