@@ -42,7 +42,19 @@ function applyTheme(theme) {
 // ═══════════════════════════════════════════════════════
 //  NAVIGATION
 // ═══════════════════════════════════════════════════════
+
+/** Pause every <video> inside a page element so nothing plays off-screen */
+function pauseAllVideosIn(pageEl) {
+  if (!pageEl) return;
+  pageEl.querySelectorAll('video').forEach(v => {
+    if (!v.paused) v.pause();
+  });
+}
+
 function navigateTo(pageId) {
+  // Pause all videos in every currently-active page before hiding it
+  document.querySelectorAll('.page.active').forEach(p => pauseAllVideosIn(p));
+
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
   const page = document.getElementById(`page-${pageId}`);
@@ -58,6 +70,11 @@ function navigateTo(pageId) {
 function createAutoplayObserver() {
   if (autoplayObserver) autoplayObserver.disconnect();
 
+  // Use a fine-grained threshold array so the observer fires at every 10 %
+  // interval — this means a card scrolled to any level below 60 % will
+  // reliably trigger a pause, not just when it hits exactly 0 %.
+  const thresholds = Array.from({ length: 11 }, (_, i) => i / 10);
+
   autoplayObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       const wrap = entry.target;
@@ -67,24 +84,28 @@ function createAutoplayObserver() {
       const v = wrap.querySelector('.card-preview-video');
 
       if (entry.intersectionRatio >= AUTOPLAY_THRESHOLD) {
+        // Card is sufficiently visible — play
         if (!wrap._videoMounted) {
           mountPreviewVideo(wrap, card);
         } else if (v && v.paused) {
           v.play().catch(() => {});
         }
       } else {
-        if (v) {
+        // Card is less than 60 % visible — pause
+        if (v && !v.paused) {
           v.pause();
-          if (entry.intersectionRatio === 0) {
-            // Fully offscreen — free network connection, allow remount
+        }
+        // Fully offscreen — also release the network connection
+        if (entry.intersectionRatio === 0 && wrap._videoMounted) {
+          if (v) {
             v.removeAttribute('src');
             v.load();
-            wrap._videoMounted = false;
           }
+          wrap._videoMounted = false;
         }
       }
     });
-  }, { threshold: [0, AUTOPLAY_THRESHOLD] });
+  }, { threshold: thresholds });
 }
 
 /**
@@ -400,6 +421,9 @@ function openDetail(id) {
   if (!card) return;
 
   const content = document.getElementById('detailContent');
+
+  // Pause any video already playing in the detail panel before wiping it
+  content.querySelectorAll('video').forEach(v => { if (!v.paused) v.pause(); });
   content.innerHTML = '';
 
   content.appendChild(buildDetailMedia(card));
