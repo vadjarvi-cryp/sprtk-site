@@ -46,11 +46,12 @@
     "desc": "Посмотрите наш новый видеообзор — полный тур по всем зонам спорткомплекса.",
     "fullDesc": "Мы подготовили для вас подробный видеообзор всех зон спортивного комплекса SPRTK. В видео вы увидите силовой зал, бассейн, SPA-зону, залы групповых занятий и многое другое. Наши тренеры расскажут о возможностях и преимуществах каждой зоны.",
     "mediaType": "video",
-    "mediaSrc": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/video/1226%20(2)(3).mp4",
-    "previewSrc": "",
     "fallbackEmoji": "🎬",
     "fallbackGradient": "linear-gradient(135deg, #0d0d0d, #333)",
-    "size": "wide"
+    "size": "wide",
+    "previewImage": "",
+    "previewVideo": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/PreviewVideo/1226%20(2)(5).mp4",
+    "fullVideo": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/video/1226%20(2)(3).mp4"
   },
   {
     "id": 5,
@@ -125,11 +126,12 @@
     "desc": "Посмотрите наш новый видеообзор — полный тур по всем зонам спорткомплекса.",
     "fullDesc": "Мы подготовили для вас подробный видеообзор всех зон спортивного комплекса SPRTK. В видео вы увидите силовой зал, бассейн, SPA-зону, залы групповых занятий и многое другое. Наши тренеры расскажут о возможностях и преимуществах каждой зоны.",
     "mediaType": "video",
-    "mediaSrc": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/video/0206%20(2).mp4",
-    "previewSrc": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/ImagesTest/1234.png",
     "fallbackEmoji": "🎬",
     "fallbackGradient": "linear-gradient(135deg, #0d0d0d, #333)",
-    "size": "tall"
+    "size": "tall",
+    "previewImage": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/ImagesTest/1234.png",
+    "previewVideo": "",
+    "fullVideo": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/video/0206%20(2).mp4"
   },
   {
     "id": 11,
@@ -442,5 +444,50 @@
     "fallbackEmoji": "👫",
     "fallbackGradient": "linear-gradient(135deg, #6d1b7b, #E8192C)",
     "size": "wide"
+  },
+  {
+    "id": 35,
+    "title": "2Вертикальный Никита2",
+    "category": "gym",
+    "categoryLabel": "Тренажерный зал",
+    "desc": "Посмотрите наш новый видеообзор — полный тур по всем зонам спорткомплекса.",
+    "fullDesc": "Мы подготовили для вас подробный видеообзор всех зон спортивного комплекса SPRTK. В видео вы увидите силовой зал, бассейн, SPA-зону, залы групповых занятий и многое другое. Наши тренеры расскажут о возможностях и преимуществах каждой зоны.",
+    "mediaType": "video",
+    "fallbackEmoji": "🎬",
+    "fallbackGradient": "linear-gradient(135deg, #0d0d0d, #333)",
+    "size": "tall",
+    "previewImage": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/ImagesTest/1234.png",
+    "previewVideo": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/PreviewVideo/previewN.mp4",
+    "fullVideo": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/video/0206%20(2).mp4"
+  },
+  {
+    "id": 36,
+    "title": "Не как у всех",
+    "category": "gym",
+    "categoryLabel": "Тренажерный зал",
+    "desc": "Посмотрите наш новый видеообзор — полный тур по всем зонам спорткомплекса.",
+    "fullDesc": "Мы подготовили для вас подробный видеообзор всех зон спортивного комплекса SPRTK. В видео вы увидите силовой зал, бассейн, SPA-зону, залы групповых занятий и многое другое. Наши тренеры расскажут о возможностях и преимуществах каждой зоны.",
+    "mediaType": "video",
+    "fallbackEmoji": "🎬",
+    "fallbackGradient": "linear-gradient(135deg, #0d0d0d, #333)",
+    "size": "tall",
+    "previewImage": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/Images/PreviwImgNeKak.png",
+    "previewVideo": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/PreviewVideo/0605%20(2)(1).mp4",
+    "fullVideo": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/video/FullNeKak.mp4"
+  },
+  {
+    "id": 37,
+    "title": "Торжественный заплыв",
+    "category": "gym",
+    "categoryLabel": "Тренажерный зал",
+    "desc": "Посмотрите наш новый видеообзор — полный тур по всем зонам спорткомплекса.",
+    "fullDesc": "Мы подготовили для вас подробный видеообзор всех зон спортивного комплекса SPRTK. В видео вы увидите силовой зал, бассейн, SPA-зону, залы групповых занятий и многое другое. Наши тренеры расскажут о возможностях и преимуществах каждой зоны.",
+    "mediaType": "video",
+    "fallbackEmoji": "🎬",
+    "fallbackGradient": "linear-gradient(135deg, #0d0d0d, #333)",
+    "size": "tall",
+    "previewImage": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/Images/PreviwImgBasstest.png",
+    "previewVideo": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/PreviewVideo/0512-%D0%BA%D0%BE%D0%BF%D0%B8%D1%8F.mp4",
+    "fullVideo": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/video/FullBasstest.mp4"
   }
 ]
