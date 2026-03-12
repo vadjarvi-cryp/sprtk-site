@@ -13,6 +13,27 @@
     "size": "tall"
   },
   {
+    "id": 2,
+    "title": "Боди Балет",
+    "category": "fitness",
+    "categoryLabel": "Фитнес",
+    "desc": "Первый раз на новом направлении",
+    "fullDesc": "Body Ballet даёт грацию и контроль тела, но без перегрузок и многолетней подготовки.
+	Body Ballet подходит тем, кто:
+	– хочет красивую осанку
+	– любит эстетичные движения
+	– боится “жёсткого” фитнеса
+	– всегда мечтал прикоснуться к балету
+	",
+    "mediaType": "video",
+    "fallbackEmoji": "🎬",
+    "fallbackGradient": "linear-gradient(135deg, #0d0d0d, #333)",
+    "size": "tall",
+    "previewImage": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/PreviewImages/PrevBodyB.png",
+    "previewVideo": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/PreviewVideo/PreVVBodb.mp4",
+    "fullVideo": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/video/FullBodyB.mp4"
+  },
+  {
     "id": 4,
     "title": "Обзор комплекса 2024",
     "category": "gym",
