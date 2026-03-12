@@ -8,6 +8,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <!-- hls.js for HLS full-video playback in non-Safari browsers -->
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@1/dist/hls.min.js"></script>
 </head>
 <body>
 
@@ -15,7 +17,8 @@
 <header class="site-header">
   <div class="header-inner">
 
-    <div class="logo-wrap">
+    <!-- Logo — clickable home button -->
+    <div class="logo-wrap" id="logoHome" role="button" tabindex="0" aria-label="На главную" style="cursor:pointer">
       <span class="logo-dot" aria-hidden="true"></span>
       <span class="logo">SPRTK</span>
     </div>
@@ -96,7 +99,7 @@
         <p class="embed-subtitle">Актуальное расписание занятий</p>
       </div>
       <div class="widget-container">
-        <div id="mf_schedule_widget_cont_g76"></div>
+        <div id="mf_schedule_widget_cont_exl"></div>
       </div>
     </div>
   </section>
@@ -145,45 +148,33 @@
 <script src="app.js"></script>
 
 <!-- Mobifitness widgets -->
-<script type="text/javascript" async="async" id="mobifitness_personal_widget_script_g76"
+<script type="text/javascript" async id="mobifitness_personal_widget_script_exl"
   src="//mobifitness.ru/personal-widget/js/code.js"
-  data-div="mf_schedule_widget_cont_g76"
+  data-div="mf_schedule_widget_cont_exl"
   data-test="0" data-debug="0"
-  data-domain="mobifitness.ru"
-  data-code="667017"
-  data-version="v6"
-  data-type="schedule"
-  data-language=""></script>
+  data-domain="mobifitness.ru" data-code="667017"
+  data-version="v6" data-type="schedule" data-language=""></script>
 
-<script type="text/javascript" async="async" id="mobifitness_personal_widget_script_859"
+<script type="text/javascript" async id="mobifitness_personal_widget_script_859"
   src="//mobifitness.ru/personal-widget/js/code.js"
   data-div="mf_shop_widget_cont_859"
   data-test="0" data-debug="0"
-  data-domain="mobifitness.ru"
-  data-code="667017"
-  data-version="v6"
-  data-type="shop"
-  data-language=""></script>
+  data-domain="mobifitness.ru" data-code="667017"
+  data-version="v6" data-type="shop" data-language=""></script>
 
-<script type="text/javascript" async="async" id="mobifitness_personal_widget_script_tnl"
-  src="//mobifitness.ru/personal-widget/js/code.js"
-  data-div="mf_personal_widget_cont_tnl"
-  data-test="0" data-debug="0"
-  data-domain="mobifitness.ru"
-  data-code="667017"
-  data-version="v6"
-  data-type="personal"
-  data-language=""></script>
-
-<script type="text/javascript" async="async" id="mobifitness_personal_widget_script_8gd"
+<script type="text/javascript" async id="mobifitness_personal_widget_script_8gd"
   src="//mobifitness.ru/personal-widget/js/code.js"
   data-div="mf_personalBook_widget_cont_8gd"
   data-test="0" data-debug="0"
-  data-domain="mobifitness.ru"
-  data-code="667017"
-  data-version="v6"
-  data-type="personalBook"
-  data-language=""></script>
+  data-domain="mobifitness.ru" data-code="667017"
+  data-version="v6" data-type="personalBook" data-language=""></script>
+
+<script type="text/javascript" async id="mobifitness_personal_widget_script_tnl"
+  src="//mobifitness.ru/personal-widget/js/code.js"
+  data-div="mf_personal_widget_cont_tnl"
+  data-test="0" data-debug="0"
+  data-domain="mobifitness.ru" data-code="667017"
+  data-version="v6" data-type="personal" data-language=""></script>
 
 </body>
 </html>

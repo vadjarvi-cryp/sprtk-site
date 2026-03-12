@@ -670,32 +670,29 @@ body::after {
 }
 
 /* ===========================
-   LOAD MORE BUTTON
+   INFINITE SCROLL SENTINEL
 =========================== */
-.load-more-wrap {
+#sprtk-sentinel {
+  height: 1px;
+  width: 100%;
+  pointer-events: none;
+}
+
+.scroll-spinner {
   display: flex;
   justify-content: center;
   padding: 32px 0 8px;
 }
-.load-more-btn {
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: 0.82rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 13px 40px;
-  border: 1.5px solid var(--border);
-  border-radius: 50px;
-  background: var(--filter-bg);
-  color: var(--text-secondary);
-  cursor: pointer;
-  transition: all var(--transition);
+.scroll-spinner::after {
+  content: '';
+  width: 28px;
+  height: 28px;
+  border: 2.5px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.75s linear infinite;
 }
-.load-more-btn:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  box-shadow: 0 4px 18px var(--accent-glow);
-}
+@keyframes spin { to { transform: rotate(360deg); } }
 
 /* ===========================
    CARD VIDEO CROSSFADE
