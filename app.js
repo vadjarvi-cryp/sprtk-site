@@ -539,38 +539,182 @@ function applyFilter(filter) {
 // ═══════════════════════════════════════════════════════
 //  DETAIL PAGE
 // ═══════════════════════════════════════════════════════
+
+/** Destroy any active HLS instances and pause all videos inside el */
+function cleanDetailContent(el) {
+  el.querySelectorAll('video').forEach(function(v) {
+    if (!v.paused) v.pause();
+    if (v._hls) { v._hls.destroy(); delete v._hls; }
+  });
+}
+
+/**
+ * Build the fixed chrome (hero: media + scrim + category + title) that
+ * always appears at the top of the detail view, regardless of content source.
+ * Layout: full-bleed image/video with gradient scrim, title overlaid at bottom.
+ */
+function buildDetailChrome(card, content) {
+  var isVideo = card.mediaType === 'video';
+
+  // Hero wrapper
+  var hero = document.createElement('div');
+  hero.className = 'detail-hero ' + (isVideo ? 'detail-hero--video' : 'detail-hero--image');
+
+  // Media element (image or video)
+  var mediaWrap = document.createElement('div');
+  mediaWrap.className = 'detail-media';
+
+  var fallback = function() {
+    hero.style.background = card.fallbackGradient;
+    var fb = document.createElement('div');
+    fb.className = 'card-media-fallback';
+    fb.style.cssText = 'min-height:220px;display:flex;align-items:center;justify-content:center;font-size:4rem;';
+    fb.textContent = card.fallbackEmoji;
+    // Insert fallback before scrim
+    var scrim = hero.querySelector('.detail-hero__scrim');
+    hero.insertBefore(fb, scrim);
+    mediaWrap.remove();
+  };
+
+  if (isVideo) {
+    var hlsSrc = card.hls || '';
+    var mp4Src = card.fullVideo || '';
+    if (hlsSrc || mp4Src) {
+      var v = document.createElement('video');
+      v.controls    = true;
+      v.playsInline = true;
+      v.onerror     = fallback;
+      mediaWrap.appendChild(v);
+      if (hlsSrc) {
+        attachHls(v, hlsSrc, fallback);
+      } else {
+        v.src = mp4Src;
+      }
+    } else if (card.previewImage) {
+      var img = document.createElement('img');
+      img.src     = card.previewImage;
+      img.alt     = card.title;
+      img.onerror = fallback;
+      mediaWrap.appendChild(img);
+    } else {
+      // Will show fallback via the function above — but we need mediaWrap in DOM first
+      setTimeout(fallback, 0);
+    }
+  } else {
+    var img2 = document.createElement('img');
+    img2.src     = card.mediaSrc;
+    img2.alt     = card.title;
+    img2.onerror = fallback;
+    mediaWrap.appendChild(img2);
+  }
+  hero.appendChild(mediaWrap);
+
+  // Scrim with category + title overlaid
+  var scrim = document.createElement('div');
+  scrim.className = 'detail-hero__scrim';
+
+  var metaRow = document.createElement('div');
+  metaRow.className = 'detail-hero__meta';
+  var catTag = document.createElement('span');
+  catTag.className   = 'detail-category';
+  catTag.textContent = card.categoryLabel;
+  metaRow.appendChild(catTag);
+  scrim.appendChild(metaRow);
+
+  var title = document.createElement('h2');
+  title.className   = 'detail-title';
+  title.textContent = card.title;
+  scrim.appendChild(title);
+
+  hero.appendChild(scrim);
+  content.appendChild(hero);
+}
+
+/**
+ * Render fallback fullDesc text as the content body.
+ */
+function renderFullDesc(card, content) {
+  if (card.fullDesc) {
+    var inner = document.createElement('div');
+    inner.className = 'detail-content__inner';
+    var p = document.createElement('p');
+    p.className = 'detail-text';
+    p.textContent = card.fullDesc;
+    inner.appendChild(p);
+    content.appendChild(inner);
+  }
+}
+
+/**
+ * Show a loading skeleton while the external HTML is being fetched.
+ * Returns the placeholder element so it can be replaced when ready.
+ */
+function showDetailLoader(content) {
+  var loader = document.createElement('div');
+  loader.className = 'detail-loader';
+  loader.id = 'detailLoader';
+  loader.innerHTML =
+    '<div class="detail-loader__bar"></div>' +
+    '<div class="detail-loader__bar detail-loader__bar--short"></div>' +
+    '<div class="detail-loader__bar"></div>' +
+    '<div class="detail-loader__bar detail-loader__bar--med"></div>';
+  content.appendChild(loader);
+  return loader;
+}
+
+function removeDetailLoader() {
+  var l = document.getElementById('detailLoader');
+  if (l) l.remove();
+}
+
+/**
+ * Fetch external HTML and inject it into the detail container.
+ * Falls back to fullDesc on network/HTTP failure.
+ */
+async function loadContentUrl(card, content) {
+  var loader = showDetailLoader(content);
+  try {
+    var res = await fetch(card.contentUrl);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    var html = await res.text();
+    removeDetailLoader();
+    var inner = document.createElement('div');
+    inner.className = 'detail-content__inner';
+    inner.innerHTML = html;
+    content.appendChild(inner);
+  } catch (err) {
+    console.warn('contentUrl fetch failed:', err);
+    removeDetailLoader();
+    if (card.fullDesc) {
+      renderFullDesc(card, content);
+    } else {
+      var errMsg = document.createElement('p');
+      errMsg.className = 'detail-error';
+      errMsg.textContent = 'Не удалось загрузить материал. Попробуйте позже.';
+      content.appendChild(errMsg);
+    }
+  }
+}
+
 function openDetail(id) {
   var card = allCards.find(function(c) { return c.id === id; });
   if (!card) return;
 
   var content = document.getElementById('detailContent');
 
-  // Destroy any HLS instance and pause before wiping DOM
-  content.querySelectorAll('video').forEach(function(v) {
-    if (!v.paused) v.pause();
-    if (v._hls) { v._hls.destroy(); delete v._hls; }
-  });
+  // Clean up previous content before wiping DOM
+  cleanDetailContent(content);
   content.innerHTML = '';
 
-  content.appendChild(buildDetailMedia(card));
+  // Always render the fixed chrome first (media + category + title)
+  buildDetailChrome(card, content);
 
-  var meta = document.createElement('div');
-  meta.className = 'detail-meta';
-  var catTag = document.createElement('span');
-  catTag.className   = 'detail-category';
-  catTag.textContent = card.categoryLabel;
-  meta.appendChild(catTag);
-  content.appendChild(meta);
-
-  var title = document.createElement('h2');
-  title.className   = 'detail-title';
-  title.textContent = card.title;
-  content.appendChild(title);
-
-  var desc = document.createElement('p');
-  desc.className   = 'detail-desc';
-  desc.textContent = card.fullDesc;
-  content.appendChild(desc);
+  // Content body: contentUrl takes priority, falls back to fullDesc
+  if (card.contentUrl) {
+    loadContentUrl(card, content);
+  } else {
+    renderFullDesc(card, content);
+  }
 
   navigateTo('detail');
 }
@@ -621,10 +765,7 @@ function init() {
 
   // Back button on detail page — clean up HLS before returning
   document.getElementById('backBtn').addEventListener('click', function() {
-    document.getElementById('detailContent').querySelectorAll('video').forEach(function(v) {
-      if (!v.paused) v.pause();
-      if (v._hls) { v._hls.destroy(); delete v._hls; }
-    });
+    cleanDetailContent(document.getElementById('detailContent'));
     navigateTo('explore');
   });
 
