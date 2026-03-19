@@ -57,6 +57,21 @@
     "fullVideo": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/video/1226%20(2)(3).mp4"
   },
   {
+    "id": 5,
+    "title": "Бицепс машина",
+    "category": "gym",
+    "categoryLabel": "Тренажерный зал",
+    "desc": "Посмотрите как првильно пользоваться этим тренажером",
+    "fullDesc": "Мы подготовили для вас подробный видеообзор всех тренажеров спортивного комплекса SPRTK. В видео вы увидите правильную технику на Бицепс Машине",
+    "mediaType": "video",
+    "fallbackEmoji": "🎬",
+    "fallbackGradient": "linear-gradient(135deg, #0d0d0d, #333)",
+    "size": "tall",
+    "previewImage": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/PreviewImages/PrevImgBtcpsMachine.png",
+    "previewVideo": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/PreviewVideo/prevBicps.mp4",
+    "hls": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/video/BicpsMachine/master.m3u8"
+  },
+  {
     "id": 10,
     "title": "Вертикальный Никита",
     "category": "gym",
