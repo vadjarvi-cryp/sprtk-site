@@ -501,7 +501,7 @@ body {
 .back-btn:hover { color: var(--accent); border-color: var(--accent); }
 .back-arrow { font-size: 1rem; }
 
-/* ---- Hero zone: media + overlaid header ---- */
+/* ---- Hero zone: media + header ---- */
 .detail-hero {
   position: relative;
   width: 100%;
@@ -511,7 +511,7 @@ body {
   background: #0d0d10;
 }
 
-/* Image cards: natural height, up to 70vh */
+/* Image cards: overlaid title on scrim */
 .detail-hero--image .detail-media {
   width: 100%;
   max-height: 70vh;
@@ -525,10 +525,16 @@ body {
   object-fit: cover;
 }
 
-/* Video cards: contain aspect ratio */
+/* Video cards: stacked layout — video on top, title block below */
+.detail-hero--video {
+  overflow: visible;        /* allow the title block to flow outside the rounded box */
+  background: transparent;
+}
 .detail-hero--video .detail-media {
   width: 100%;
   background: #000;
+  border-radius: var(--radius-card);
+  overflow: hidden;
 }
 .detail-hero--video .detail-media video {
   display: block;
@@ -537,6 +543,20 @@ body {
   max-height: 75vh;
   object-fit: contain;
   background: #000;
+}
+/* Title block sits below the video, not overlaid */
+.detail-hero--video .detail-hero__scrim {
+  position: static;
+  background: none;
+  padding: 20px 4px 0;
+  pointer-events: auto;
+}
+.detail-hero--video .detail-title {
+  color: var(--text-primary);
+  text-shadow: none;
+}
+.detail-hero--video .detail-hero__meta {
+  margin-bottom: 8px;
 }
 
 /* Fallback (emoji) */
@@ -548,8 +568,8 @@ body {
   font-size: 4rem;
 }
 
-/* Gradient scrim over the bottom of the hero for text legibility */
-.detail-hero__scrim {
+/* Gradient scrim for IMAGE cards only — overlaid on the photo */
+.detail-hero--image .detail-hero__scrim {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -560,6 +580,12 @@ body {
     rgba(0,0,0,0.48) 55%,
     transparent 100%);
   pointer-events: none;
+}
+.detail-hero--image .detail-hero__meta { margin-bottom: 10px; }
+.detail-hero--image .detail-title {
+  color: #fff;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+  pointer-events: auto;
 }
 
 .detail-hero__meta {
@@ -585,14 +611,11 @@ body {
   font-size: clamp(1.8rem, 5vw, 3.2rem);
   letter-spacing: 0.03em;
   line-height: 1.05;
-  color: #fff;
-  text-shadow: 0 2px 12px rgba(0,0,0,0.5);
   margin: 0;
-  pointer-events: auto;
 }
 
-/* Light theme: hero still dark (image contrast) */
-[data-theme="light"] .detail-hero { background: #d4d4dc; }
+/* Light theme */
+[data-theme="light"] .detail-hero--image { background: #d4d4dc; }
 [data-theme="light"] .detail-hero--video .detail-media { background: #1a1a22; }
 
 .detail-desc {
