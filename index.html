@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="about-styles.css" />
   <!-- hls.js for HLS full-video playback in non-Safari browsers -->
   <script src="https://cdn.jsdelivr.net/npm/hls.js@1/dist/hls.min.js"></script>
   <script>
@@ -86,16 +87,257 @@
 
   <!-- О НАС -->
   <section class="page" id="page-about">
-    <div class="embed-page-container">
-      <div class="embed-header">
-        <h2 class="embed-title">О нас</h2>
-        <p class="embed-subtitle">Информация о спортивном комплексе</p>
+    <div class="about-page-wrap">
+
+      <!-- HERO BAND -->
+      <div class="about-hero">
+        <div class="about-hero__glow" aria-hidden="true"></div>
+        <div class="about-hero__particles" aria-hidden="true" id="aboutParticles"></div>
+        <div class="about-hero__inner">
+          <p class="about-hero__eyebrow">Спортивный комплекс</p>
+          <h1 class="about-hero__title">О нас</h1>
+          <p class="about-hero__sub">
+            SPRTK — спортивный комплекс с богатой историей и современной инфраструктурой.
+            Мы объединяем профессиональных тренеров, три спортивные зоны и&nbsp;более тысячи
+            активных клиентов — всё для того, чтобы вы достигали новых высот.
+          </p>
+        </div>
       </div>
-      <div class="widget-placeholder">
-        <div class="placeholder-icon">🏟</div>
-        <p>Здесь будет размещён внешний виджет</p>
-        <span class="placeholder-tag">About Widget</span>
+
+      <!-- STATS -->
+      <div class="about-stats">
+        <div class="about-stats__item" data-target="10" data-suffix="+">
+          <span class="about-stats__number" id="stat-0">0</span>
+          <span class="about-stats__label">тренеров</span>
+        </div>
+        <div class="about-stats__item" data-target="3" data-suffix="">
+          <span class="about-stats__number" id="stat-1">0</span>
+          <span class="about-stats__label">зоны</span>
+        </div>
+        <div class="about-stats__item" data-target="1000" data-suffix="+">
+          <span class="about-stats__number" id="stat-2">0</span>
+          <span class="about-stats__label">клиентов</span>
+        </div>
+        <div class="about-stats__item" data-target="1972" data-suffix="">
+          <span class="about-stats__number" id="stat-3">0</span>
+          <span class="about-stats__label">год основания</span>
+        </div>
       </div>
+
+      <!-- ADVANTAGES -->
+      <div class="about-section">
+        <div class="about-section__head">
+          <span class="about-section__tag">Почему мы</span>
+          <h2 class="about-section__title">Наши преимущества</h2>
+        </div>
+        <div class="about-adv-grid">
+          <div class="about-adv-card">
+            <div class="about-adv-icon">🏋️</div>
+            <h3 class="about-adv-title">Современное оборудование</h3>
+            <p class="about-adv-text">Тренажёрный зал оснащён профессиональным оборудованием ведущих мировых брендов.</p>
+          </div>
+          <div class="about-adv-card">
+            <div class="about-adv-icon">🏅</div>
+            <h3 class="about-adv-title">Профессиональные тренеры</h3>
+            <p class="about-adv-text">Более 10 сертифицированных специалистов с опытом работы от 5 лет помогут достичь ваших целей.</p>
+          </div>
+          <div class="about-adv-card">
+            <div class="about-adv-icon">🏊</div>
+            <h3 class="about-adv-title">Бассейн и фитнес</h3>
+            <p class="about-adv-text">Крытый бассейн 25 м, групповые занятия по аэробике, йоге, пилатесу и многому другому.</p>
+          </div>
+          <div class="about-adv-card">
+            <div class="about-adv-icon">📍</div>
+            <h3 class="about-adv-title">Удобное расположение</h3>
+            <p class="about-adv-text">Центр города, шаговая доступность от остановок общественного транспорта, своя парковка.</p>
+          </div>
+          <div class="about-adv-card">
+            <div class="about-adv-icon">🕗</div>
+            <h3 class="about-adv-title">Гибкий график</h3>
+            <p class="about-adv-text">Работаем с 7:15 до 22:30 — удобно для ранних птиц и поздних пташек.</p>
+          </div>
+          <div class="about-adv-card">
+            <div class="about-adv-icon">💳</div>
+            <h3 class="about-adv-title">Разные форматы абонементов</h3>
+            <p class="about-adv-text">Выбирайте разовые посещения, месячные и годовые абонементы по доступным ценам.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- GALLERY -->
+      <div class="about-section">
+        <div class="about-section__head">
+          <span class="about-section__tag">Галерея</span>
+          <h2 class="about-section__title">Наш комплекс</h2>
+        </div>
+        <div class="about-gallery" id="aboutGallery">
+          <div class="about-gallery__item" data-src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=1200&q=80">
+            <img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=800&q=75" alt="Тренажёрный зал" loading="lazy" />
+            <div class="about-gallery__overlay"><span>Тренажёрный зал</span></div>
+          </div>
+          <div class="about-gallery__item" data-src="https://images.unsplash.com/photo-1576610616656-d3aa5d1f4534?w=1200&q=80">
+            <img src="https://images.unsplash.com/photo-1576610616656-d3aa5d1f4534?w=800&q=75" alt="Бассейн" loading="lazy" />
+            <div class="about-gallery__overlay"><span>Бассейн</span></div>
+          </div>
+          <div class="about-gallery__item" data-src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200&q=80">
+            <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=75" alt="Фитнес-зал" loading="lazy" />
+            <div class="about-gallery__overlay"><span>Фитнес-зал</span></div>
+          </div>
+          <div class="about-gallery__item" data-src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80">
+            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=75" alt="Кардиозона" loading="lazy" />
+            <div class="about-gallery__overlay"><span>Кардиозона</span></div>
+          </div>
+          <div class="about-gallery__item" data-src="https://images.unsplash.com/photo-1600881333168-2ef49b341f30?w=1200&q=80">
+            <img src="https://images.unsplash.com/photo-1600881333168-2ef49b341f30?w=800&q=75" alt="Групповые занятия" loading="lazy" />
+            <div class="about-gallery__overlay"><span>Групповые занятия</span></div>
+          </div>
+          <div class="about-gallery__item" data-src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=1200&q=80">
+            <img src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=800&q=75" alt="Зона растяжки" loading="lazy" />
+            <div class="about-gallery__overlay"><span>Зона растяжки</span></div>
+          </div>
+          <div class="about-gallery__item" data-src="https://images.unsplash.com/photo-1487956382158-bb926046304a?w=1200&q=80">
+            <img src="https://images.unsplash.com/photo-1487956382158-bb926046304a?w=800&q=75" alt="Раздевалки" loading="lazy" />
+            <div class="about-gallery__overlay"><span>Раздевалки</span></div>
+          </div>
+          <div class="about-gallery__item" data-src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=1200&q=80">
+            <img src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=800&q=75" alt="Персональный тренинг" loading="lazy" />
+            <div class="about-gallery__overlay"><span>Персональный тренинг</span></div>
+          </div>
+          <div class="about-gallery__item" data-src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=1200&q=80">
+            <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&q=75" alt="Йога-студия" loading="lazy" />
+            <div class="about-gallery__overlay"><span>Йога-студия</span></div>
+          </div>
+          <div class="about-gallery__item" data-src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=1200&q=80">
+            <img src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=800&q=75" alt="Фасад комплекса" loading="lazy" />
+            <div class="about-gallery__overlay"><span>Фасад комплекса</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LIGHTBOX -->
+      <div class="about-lightbox" id="aboutLightbox" role="dialog" aria-modal="true" aria-label="Просмотр фото">
+        <button class="about-lightbox__close" id="lightboxClose" aria-label="Закрыть">✕</button>
+        <button class="about-lightbox__prev" id="lightboxPrev" aria-label="Предыдущее">‹</button>
+        <button class="about-lightbox__next" id="lightboxNext" aria-label="Следующее">›</button>
+        <div class="about-lightbox__img-wrap">
+          <img id="lightboxImg" src="" alt="" />
+        </div>
+        <p class="about-lightbox__caption" id="lightboxCaption"></p>
+      </div>
+      <div class="about-lightbox__backdrop" id="lightboxBackdrop"></div>
+
+      <!-- CONTACT + MAP -->
+      <div class="about-section">
+        <div class="about-section__head">
+          <span class="about-section__tag">Контакты</span>
+          <h2 class="about-section__title">Как нас найти</h2>
+        </div>
+        <div class="about-contact-grid">
+          <div class="about-contact-info">
+            <div class="about-contact-card">
+              <div class="about-contact-item">
+                <div class="about-contact-icon">📍</div>
+                <div>
+                  <p class="about-contact-label">Адрес</p>
+                  <p class="about-contact-value">Кострома, Петрковский бул., 42</p>
+                </div>
+              </div>
+              <div class="about-contact-item">
+                <div class="about-contact-icon">📞</div>
+                <div>
+                  <p class="about-contact-label">Телефон</p>
+                  <a class="about-contact-value about-contact-link" href="tel:+74942000000">+7 (4942) 00-00-00</a>
+                </div>
+              </div>
+              <div class="about-contact-item">
+                <div class="about-contact-icon">🕗</div>
+                <div>
+                  <p class="about-contact-label">Режим работы</p>
+                  <p class="about-contact-value">Ежедневно 7:15 — 22:30</p>
+                </div>
+              </div>
+            </div>
+            <!-- SOCIAL -->
+            <div class="about-social">
+              <p class="about-social__label">Мы в соцсетях</p>
+              <div class="about-social__links">
+                <a class="about-social__btn" href="#" aria-label="ВКонтакте">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M15.07 2H8.93C3.33 2 2 3.33 2 8.93v6.14C2 20.67 3.33 22 8.93 22h6.14C20.67 22 22 20.67 22 15.07V8.93C22 3.33 20.67 2 15.07 2zm3.08 13.38h-1.64c-.62 0-.81-.5-1.92-1.62-1-.93-1.43-1.06-1.67-1.06-.35 0-.44.1-.44.58v1.47c0 .42-.13.67-1.25.67-1.83 0-3.87-1.11-5.3-3.17C4.76 9.9 4 8.2 4 7.42c0-.25.1-.48.58-.48h1.64c.43 0 .6.2.76.67.85 2.44 2.26 4.57 2.84 4.57.22 0 .32-.1.32-.65V9.67c-.07-1.15-.67-1.25-.67-1.66 0-.2.17-.4.43-.4h2.58c.35 0 .48.19.48.6v3.24c0 .35.15.48.26.48.22 0 .4-.13.8-.54 1.23-1.38 2.12-3.5 2.12-3.5.12-.25.32-.48.75-.48h1.64c.49 0 .6.25.49.6-.21.97-2.2 3.77-2.2 3.77-.17.28-.24.4 0 .71.17.22.73.71 1.1 1.14.68.77 1.2 1.42 1.34 1.87.14.43-.08.65-.52.65z"/></svg>
+                  <span>ВКонтакте</span>
+                </a>
+                <a class="about-social__btn" href="#" aria-label="Max">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.2-.04-.28-.02-.12.02-2.01 1.28-5.68 3.75-.54.37-1.02.55-1.46.54-.48-.01-1.4-.27-2.08-.49-.84-.28-1.51-.43-1.45-.9.03-.25.38-.51 1.03-.78 4.04-1.76 6.74-2.92 8.1-3.48 3.85-1.6 4.65-1.88 5.17-1.89.11 0 .37.03.53.17.14.12.18.28.2.4-.01.06-.01.24-.02.38z"/></svg>
+                  <span>Max</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-map-wrap">
+            <iframe
+              src="https://yandex.ru/map-widget/v1/?um=constructor%3A&amp;source=constructor&amp;ll=40.962143%2C57.760847&amp;z=15&amp;l=map&amp;pt=40.962143%2C57.760847%2Cpm2rdm"
+              width="100%"
+              height="100%"
+              frameborder="0"
+              allowfullscreen="true"
+              style="border-radius:10px;border:none;"
+              title="Карта SPRTK"
+              loading="lazy"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+
+      <!-- DOCUMENTS -->
+      <div class="about-section">
+        <div class="about-section__head">
+          <span class="about-section__tag">Документы</span>
+          <h2 class="about-section__title">Официальные документы</h2>
+        </div>
+        <div class="about-docs-grid">
+          <div class="about-doc-card">
+            <div class="about-doc-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="14,2 14,8 20,8" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="about-doc-info"><p class="about-doc-title">Устав организации</p><p class="about-doc-size">PDF · 1.2 MB</p></div>
+            <a class="about-doc-btn" href="https://s3.example.com/docs/ustav.pdf" download aria-label="Скачать"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 15l-4-4h2.5V4h3v7H16l-4 4z" fill="currentColor"/><rect x="4" y="18" width="16" height="2" rx="1" fill="currentColor"/></svg></a>
+          </div>
+          <div class="about-doc-card">
+            <div class="about-doc-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="14,2 14,8 20,8" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="about-doc-info"><p class="about-doc-title">Правила посещения</p><p class="about-doc-size">PDF · 0.8 MB</p></div>
+            <a class="about-doc-btn" href="https://s3.example.com/docs/rules.pdf" download aria-label="Скачать"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 15l-4-4h2.5V4h3v7H16l-4 4z" fill="currentColor"/><rect x="4" y="18" width="16" height="2" rx="1" fill="currentColor"/></svg></a>
+          </div>
+          <div class="about-doc-card">
+            <div class="about-doc-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="14,2 14,8 20,8" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="about-doc-info"><p class="about-doc-title">Политика конфиденциальности</p><p class="about-doc-size">PDF · 0.5 MB</p></div>
+            <a class="about-doc-btn" href="https://s3.example.com/docs/privacy.pdf" download aria-label="Скачать"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 15l-4-4h2.5V4h3v7H16l-4 4z" fill="currentColor"/><rect x="4" y="18" width="16" height="2" rx="1" fill="currentColor"/></svg></a>
+          </div>
+          <div class="about-doc-card">
+            <div class="about-doc-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="14,2 14,8 20,8" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="about-doc-info"><p class="about-doc-title">Договор оферты</p><p class="about-doc-size">PDF · 1.0 MB</p></div>
+            <a class="about-doc-btn" href="https://s3.example.com/docs/oferta.pdf" download aria-label="Скачать"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 15l-4-4h2.5V4h3v7H16l-4 4z" fill="currentColor"/><rect x="4" y="18" width="16" height="2" rx="1" fill="currentColor"/></svg></a>
+          </div>
+          <div class="about-doc-card">
+            <div class="about-doc-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="14,2 14,8 20,8" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="about-doc-info"><p class="about-doc-title">Санитарные нормы</p><p class="about-doc-size">PDF · 0.6 MB</p></div>
+            <a class="about-doc-btn" href="https://s3.example.com/docs/sanitary.pdf" download aria-label="Скачать"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 15l-4-4h2.5V4h3v7H16l-4 4z" fill="currentColor"/><rect x="4" y="18" width="16" height="2" rx="1" fill="currentColor"/></svg></a>
+          </div>
+          <div class="about-doc-card">
+            <div class="about-doc-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="14,2 14,8 20,8" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="about-doc-info"><p class="about-doc-title">Лицензия</p><p class="about-doc-size">PDF · 1.5 MB</p></div>
+            <a class="about-doc-btn" href="https://s3.example.com/docs/license.pdf" download aria-label="Скачать"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 15l-4-4h2.5V4h3v7H16l-4 4z" fill="currentColor"/><rect x="4" y="18" width="16" height="2" rx="1" fill="currentColor"/></svg></a>
+          </div>
+          <div class="about-doc-card">
+            <div class="about-doc-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="14,2 14,8 20,8" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="about-doc-info"><p class="about-doc-title">Прейскурант цен</p><p class="about-doc-size">PDF · 0.4 MB</p></div>
+            <a class="about-doc-btn" href="https://s3.example.com/docs/prices.pdf" download aria-label="Скачать"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 15l-4-4h2.5V4h3v7H16l-4 4z" fill="currentColor"/><rect x="4" y="18" width="16" height="2" rx="1" fill="currentColor"/></svg></a>
+          </div>
+          <div class="about-doc-card">
+            <div class="about-doc-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="14,2 14,8 20,8" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="about-doc-info"><p class="about-doc-title">Пожарная безопасность</p><p class="about-doc-size">PDF · 0.7 MB</p></div>
+            <a class="about-doc-btn" href="https://s3.example.com/docs/fire.pdf" download aria-label="Скачать"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 15l-4-4h2.5V4h3v7H16l-4 4z" fill="currentColor"/><rect x="4" y="18" width="16" height="2" rx="1" fill="currentColor"/></svg></a>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -154,6 +396,7 @@
 </main>
 
 <script src="app.js"></script>
+<script src="about-script.js"></script>
 
 <!-- Mobifitness widgets -->
 <script type="text/javascript" async id="mobifitness_personal_widget_script_exl"
