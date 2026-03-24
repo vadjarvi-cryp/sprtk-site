@@ -41,45 +41,11 @@
   to   { opacity: 1; }
 }
 
-.about-hero__particles {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-.about-hero__particles span {
-  position: absolute;
-  display: block;
-  width: 2px;
-  height: 2px;
-  border-radius: 50%;
-  background: var(--accent);
-  opacity: 0;
-  animation: particleFly var(--dur, 8s) var(--delay, 0s) linear infinite;
-}
-
-@keyframes particleFly {
-  0%   { transform: translateY(100%) translateX(0); opacity: 0; }
-  10%  { opacity: 0.6; }
-  90%  { opacity: 0.3; }
-  100% { transform: translateY(-120%) translateX(var(--drift, 20px)); opacity: 0; }
-}
-
 .about-hero__inner {
   position: relative;
   z-index: 1;
   max-width: 680px;
   margin: 0 auto;
-}
-
-.about-hero__eyebrow {
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 16px;
 }
 
 .about-hero__title {
@@ -107,7 +73,7 @@
 =========================== */
 .about-stats {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 10px;
   margin: 10px 0 0;
 }

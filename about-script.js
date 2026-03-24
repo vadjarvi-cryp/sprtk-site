@@ -141,11 +141,8 @@ function initAboutLightbox() {
 // ─── INIT ABOUT ────────────────────────────────────────────
 // Called when the About page becomes active
 function initAboutPage() {
-  if (document.getElementById('aboutParticles')) {
-    initAboutParticles();
-    initAboutStats();
-    initAboutLightbox();
-  }
+  initAboutStats();
+  initAboutLightbox();
 }
 
 // Hook into nav — trigger about init when tab is clicked
