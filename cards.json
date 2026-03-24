@@ -7,7 +7,7 @@
     "desc": "Современный олимпийский бассейн с кристально чистой водой и профессиональными дорожками для плавания.",
     "fullDesc": "Наш открытый олимпийский бассейн длиной 50 метров оснащён современной системой очистки воды и профессиональным освещением. Здесь проводятся соревнования, тренировки спортсменов всех уровней и занятия по водной аэробике. Вода поддерживается при оптимальной температуре 26–28°C. Для посетителей доступны раздевалки, душевые и камеры хранения.",
     "mediaType": "image",
-    "mediaSrc": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/Images/%D0%91%D0%BB%D0%B8%D0%BD%D1%8B1.jpg",
+    "mediaSrc": "https://0f093848-5c2d-4e2f-978f-d726c7977145.selcdn.net/Images/%D0%91%D0%BB%D0%B8%D0%BD%D1%8B1.jpg",
     "fallbackEmoji": "🏊",
     "fallbackGradient": "linear-gradient(135deg, #0077b6, #00b4d8)",
     "size": "tall"
@@ -23,9 +23,9 @@
     "fallbackEmoji": "🎬",
     "fallbackGradient": "linear-gradient(135deg, #0d0d0d, #333)",
     "size": "tall",
-    "previewImage": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/PreviewImages/PrevBodyB.png",
-    "previewVideo": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/PreviewVideo/PreVVBodb.mp4",
-    "fullVideo": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/video/FullBodyB.mp4"
+    "previewImage": "https://0f093848-5c2d-4e2f-978f-d726c7977145.selcdn.net/PreviewImages/PrevBodyB.png",
+    "previewVideo": "https://0f093848-5c2d-4e2f-978f-d726c7977145.selcdn.net/PreviewVideo/PreVVBodb.mp4",
+    "fullVideo": "https://0f093848-5c2d-4e2f-978f-d726c7977145.selcdn.net/video/FullBodyB.mp4"
   },
   {
     "id": 3,
@@ -33,10 +33,10 @@
     "category": "pool",
     "categoryLabel": "Бассейн",
     "desc": "Приглашаем детей не умеющих плавать на новый курс!",
-    "contentUrl": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/ContentPages/pool-beginner-kids2.html",
+    "contentUrl": "https://0f093848-5c2d-4e2f-978f-d726c7977145.selcdn.net/ContentPages/pool-beginner-kids2.html",
     "fullDesc": "Body Ballet даёт грацию и контроль тела, но без перегрузок и многолетней подготовки.",
     "mediaType": "image",
-    "mediaSrc": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/Images/%D0%9D%D0%BE%D0%B2%D0%B8%D1%87%D0%BE%D0%BA%20%D0%B4%D0%B5%D1%82%D0%B8%202026.jpg",
+    "mediaSrc": "https://0f093848-5c2d-4e2f-978f-d726c7977145.selcdn.net/Images/%D0%9D%D0%BE%D0%B2%D0%B8%D1%87%D0%BE%D0%BA%20%D0%B4%D0%B5%D1%82%D0%B8%202026.jpg",
     "fallbackEmoji": "🏊",
     "fallbackGradient": "linear-gradient(135deg, #0d0d0d, #333)",
     "size": "tall"
@@ -53,8 +53,8 @@
     "fallbackGradient": "linear-gradient(135deg, #0d0d0d, #333)",
     "size": "wide",
     "previewImage": "",
-    "previewVideo": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/PreviewVideo/1226%20(2)(5).mp4",
-    "fullVideo": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/video/1226%20(2)(3).mp4"
+    "previewVideo": "https://0f093848-5c2d-4e2f-978f-d726c7977145.selcdn.net/PreviewVideo/1226%20(2)(5).mp4",
+    "fullVideo": "https://0f093848-5c2d-4e2f-978f-d726c7977145.selcdn.net/video/1226%20(2)(3).mp4"
   },
   {
     "id": 5,
@@ -67,9 +67,9 @@
     "fallbackEmoji": "🎬",
     "fallbackGradient": "linear-gradient(135deg, #0d0d0d, #333)",
     "size": "tall",
-    "previewImage": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/PreviewImages/PrevImgBtcpsMachine.png",
-    "previewVideo": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/PreviewVideo/prevBicps.mp4",
-    "hls": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/video/BicpsMachine/master.m3u8"
+    "previewImage": "https://0f093848-5c2d-4e2f-978f-d726c7977145.selcdn.net/PreviewImages/PrevImgBtcpsMachine.png",
+    "previewVideo": "https://0f093848-5c2d-4e2f-978f-d726c7977145.selcdn.net/PreviewVideo/prevBicps.mp4",
+    "hls": "https://0f093848-5c2d-4e2f-978f-d726c7977145.selcdn.net/video/BicpsMachine/master.m3u8"
   },
   {
     "id": 10,
@@ -82,9 +82,9 @@
     "fallbackEmoji": "🎬",
     "fallbackGradient": "linear-gradient(135deg, #0d0d0d, #333)",
     "size": "tall",
-    "previewImage": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/ImagesTest/1234.png",
+    "previewImage": "https://0f093848-5c2d-4e2f-978f-d726c7977145.selcdn.net/ImagesTest/1234.png",
     "previewVideo": "",
-    "fullVideo": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/video/0206%20(2).mp4"
+    "fullVideo": "https://0f093848-5c2d-4e2f-978f-d726c7977145.selcdn.net/video/0206%20(2).mp4"
   },
   {
     "id": 11,
@@ -94,7 +94,7 @@
     "desc": "Современный олимпийский бассейн с кристально чистой водой и профессиональными дорожками для плавания.",
     "fullDesc": "Наш открытый олимпийский бассейн длиной 50 метров оснащён современной системой очистки воды и профессиональным освещением. Здесь проводятся соревнования, тренировки спортсменов всех уровней и занятия по водной аэробике. Вода поддерживается при оптимальной температуре 26–28°C. Для посетителей доступны раздевалки, душевые и камеры хранения.",
     "mediaType": "image",
-    "mediaSrc": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/Images/Generated%20Image%20October%2023%2C%202025%20-%203_10PM.png",
+    "mediaSrc": "https://0f093848-5c2d-4e2f-978f-d726c7977145.selcdn.net/Images/Generated%20Image%20October%2023%2C%202025%20-%203_10PM.png",
     "fallbackEmoji": "🏊",
     "fallbackGradient": "linear-gradient(135deg, #0077b6, #00b4d8)",
     "size": "normal"
@@ -107,7 +107,7 @@
     "desc": "Плавайте в своём ритме — дорожки свободного плавания доступны каждый день с раннего утра до позднего вечера.",
     "fullDesc": "Дорожки свободного плавания открыты для всех желающих ежедневно с 6:30 до 22:00. Вы можете приобрести разовый билет или абонемент на любое количество посещений. Для вашего удобства в зале работают инструкторы, готовые помочь с техникой, а в раздевалках имеются шкафчики и душевые.",
     "mediaType": "image",
-    "mediaSrc": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/ImagesTest/snorkel-goggles-and-water-of-swimming-pool%20(1).jpg",
+    "mediaSrc": "https://0f093848-5c2d-4e2f-978f-d726c7977145.selcdn.net/ImagesTest/snorkel-goggles-and-water-of-swimming-pool%20(1).jpg",
     "fallbackEmoji": "🏊",
     "fallbackGradient": "linear-gradient(135deg, #0077b6, #00b4d8)",
     "size": "normal"
@@ -120,7 +120,7 @@
     "desc": "Обучение плаванию с нуля для детей — безопасно, весело и профессионально.",
     "fullDesc": "Наши детские курсы плавания рассчитаны на детей от 4 лет. Программа построена поэтапно: от освоения водного пространства до уверенных стилей плавания. Занятия ведут сертифицированные детские тренеры в группах не более 6 человек. Курс состоит из 12 занятий с выдачей сертификата по окончании.",
     "mediaType": "image",
-    "mediaSrc": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/ImagesTest/Generated%20Image%20January%2020%2C%202026%20-%202_42PM.png",
+    "mediaSrc": "https://0f093848-5c2d-4e2f-978f-d726c7977145.selcdn.net/ImagesTest/Generated%20Image%20January%2020%2C%202026%20-%202_42PM.png",
     "fallbackEmoji": "🐬",
     "fallbackGradient": "linear-gradient(135deg, #0096c7, #00b4d8)",
     "size": "tall"
@@ -133,7 +133,7 @@
     "desc": "Никогда не плавали или хотите поставить технику с нуля? Курс «Новичок» — идеальный старт для взрослых.",
     "fullDesc": "Курс «Новичок» для взрослых — это 10 занятий, разработанных специально для тех, кто боится воды или никогда не учился плавать. Маленькие группы (до 5 человек), индивидуальный подход, опытные тренеры. По итогам курса вы освоите два стиля плавания и сможете самостоятельно преодолеть 200 метров.",
     "mediaType": "image",
-    "mediaSrc": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/ImagesTest/plovec-s-oborudovaniem-v-basseine-polnyi-kadr.jpg",
+    "mediaSrc": "https://0f093848-5c2d-4e2f-978f-d726c7977145.selcdn.net/ImagesTest/plovec-s-oborudovaniem-v-basseine-polnyi-kadr.jpg",
     "fallbackEmoji": "🏊",
     "fallbackGradient": "linear-gradient(135deg, #023e8a, #0077b6)",
     "size": "normal"
@@ -146,7 +146,7 @@
     "desc": "Оздоровительное плавание для детей — укрепляем осанку, иммунитет и уверенность в воде.",
     "fullDesc": "Группа «Здоровье» создана для детей, которые хотят плавать для общего физического развития. Программа включает упражнения на развитие дыхания, координацию и правильную технику. Занятия проходят 2 раза в неделю, группы до 8 человек. Подходит для детей 5–14 лет любого уровня подготовки.",
     "mediaType": "image",
-    "mediaSrc": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/ImagesTest/Generated%20Image%20February%2002%2C%202026%20-%204_02PM.png",
+    "mediaSrc": "https://0f093848-5c2d-4e2f-978f-d726c7977145.selcdn.net/ImagesTest/Generated%20Image%20February%2002%2C%202026%20-%204_02PM.png",
     "fallbackEmoji": "🌟",
     "fallbackGradient": "linear-gradient(135deg, #0096c7, #48cae4)",
     "size": "normal"
@@ -159,7 +159,7 @@
     "desc": "Спортивное плавание для детей с прицелом на результат, соревнования и личный рост.",
     "fullDesc": "Группа «Спорт» для детей 6–16 лет, ориентированных на соревновательное плавание. Программа включает работу над всеми четырьмя стилями, стартами, поворотами и тактикой заплыва. Тренировки 3–4 раза в неделю. Наши воспитанники регулярно участвуют и побеждают в городских и региональных соревнованиях.",
     "mediaType": "image",
-    "mediaSrc": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/ImagesTest/DSC04830.jpg",
+    "mediaSrc": "https://0f093848-5c2d-4e2f-978f-d726c7977145.selcdn.net/ImagesTest/DSC04830.jpg",
     "fallbackEmoji": "🏅",
     "fallbackGradient": "linear-gradient(135deg, #0077b6, #E8192C)",
     "size": "tall"
@@ -172,7 +172,7 @@
     "desc": "Плавание для взрослых в комфортном темпе — для тех, кто ценит удовольствие от тренировки.",
     "fullDesc": "Группа «Любитель» идеально подходит для взрослых, которые хотят плавать регулярно и улучшать технику без соревновательного давления. Занятия проходят 2 раза в неделю, акцент на выносливости, технике и удовольствии от процесса. Группы до 10 человек, все уровни приветствуются.",
     "mediaType": "image",
-    "mediaSrc": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/ImagesTest/photo_5289729825843573966_y.jpg",
+    "mediaSrc": "https://0f093848-5c2d-4e2f-978f-d726c7977145.selcdn.net/ImagesTest/photo_5289729825843573966_y.jpg",
     "fallbackEmoji": "🌊",
     "fallbackGradient": "linear-gradient(135deg, #023e8a, #0096c7)",
     "size": "normal"
@@ -185,7 +185,7 @@
     "desc": "Для опытных пловцов, стремящихся к совершенствованию техники и высоким результатам.",
     "fullDesc": "Группа «Мастер» создана для взрослых пловцов с хорошей подготовкой, желающих систематически работать над техникой, скоростью и выносливостью. Программа составляется индивидуально для каждого участника, используется видеоанализ техники и данные спортивных часов. Тренировки 3–5 раз в неделю.",
     "mediaType": "image",
-    "mediaSrc": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/ImagesTest/DSC05048.jpg",
+    "mediaSrc": "https://0f093848-5c2d-4e2f-978f-d726c7977145.selcdn.net/ImagesTest/DSC05048.jpg",
     "fallbackEmoji": "🥇",
     "fallbackGradient": "linear-gradient(135deg, #0077b6, #023e8a)",
     "size": "normal"
@@ -198,7 +198,7 @@
     "desc": "Персональный тренер — только для вашего ребёнка. Максимальный прогресс в кратчайшие сроки.",
     "fullDesc": "Индивидуальные занятия в бассейне для детей — это 100% внимания тренера вашему ребёнку. Программа составляется с учётом возраста, уровня подготовки и целей. Особенно эффективно для детей с водобоязнью или особыми потребностями. Занятия длительностью 45 минут, расписание согласовывается индивидуально.",
     "mediaType": "image",
-    "mediaSrc": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/ImagesTest/Generated%20Image%20February%2010%2C%202026%20-%203_43PM.png",
+    "mediaSrc": "https://0f093848-5c2d-4e2f-978f-d726c7977145.selcdn.net/ImagesTest/Generated%20Image%20February%2010%2C%202026%20-%203_43PM.png",
     "fallbackEmoji": "👶",
     "fallbackGradient": "linear-gradient(135deg, #0096c7, #48cae4)",
     "size": "normal"
@@ -211,7 +211,7 @@
     "desc": "Персональные тренировки по плаванию для взрослых — работаем над техникой, скоростью и целями.",
     "fullDesc": "Персональные тренировки по плаванию для взрослых дают возможность работать точечно над своими слабыми местами. Тренер составит программу под ваши цели: будь то первый километр в открытой воде, подготовка к триатлону или просто красивая техника. Занятия 45 или 60 минут по удобному расписанию.",
     "mediaType": "image",
-    "mediaSrc": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/ImagesTest/e9Vh4BEhUzl1UIS1daRm9GkcXUJaK6uISKYyWLaAq4oN42S8HYF9ZJl-PY-btKkIeIfs4zbt-9BPfl3d2227Uiix.jpg",
+    "mediaSrc": "https://0f093848-5c2d-4e2f-978f-d726c7977145.selcdn.net/ImagesTest/e9Vh4BEhUzl1UIS1daRm9GkcXUJaK6uISKYyWLaAq4oN42S8HYF9ZJl-PY-btKkIeIfs4zbt-9BPfl3d2227Uiix.jpg",
     "fallbackEmoji": "🏊",
     "fallbackGradient": "linear-gradient(135deg, #023e8a, #0077b6)",
     "size": "tall"
@@ -224,7 +224,7 @@
     "desc": "Тренировки для подростков: правильный старт в силовом спорте под контролем тренера.",
     "fullDesc": "Программа «Junior» разработана специально для подростков 12–17 лет. Занятия включают базовые упражнения с весом тела и лёгкими отягощениями, развитие координации и выносливости. Группы до 6 человек, тренер контролирует каждый подход. Расписание 2–3 раза в неделю.",
     "mediaType": "image",
-    "mediaSrc": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/ImagesTest/df_6xnXpcKNbOuxGEv_IJ2zkEGrpEyVD18l1b9j5XJM8y6PSpoYerMNDoDunC8s.jpg",
+    "mediaSrc": "https://0f093848-5c2d-4e2f-978f-d726c7977145.selcdn.net/ImagesTest/df_6xnXpcKNbOuxGEv_IJ2zkEGrpEyVD18l1b9j5XJM8y6PSpoYerMNDoDunC8s.jpg",
     "fallbackEmoji": "💪",
     "fallbackGradient": "linear-gradient(135deg, #1a1a2e, #E8192C)",
     "size": "normal"
@@ -237,7 +237,7 @@
     "desc": "Введение в тренажёрный зал для новичков — научим работать с оборудованием безопасно и эффективно.",
     "fullDesc": "«Первые шаги» — 8-недельная программа для тех, кто впервые приходит в тренажёрный зал. За 16 занятий вы освоите базовые упражнения, научитесь читать своё тело и составлять собственные тренировки. Группы до 6 человек, тренер проводит каждое занятие лично. По окончании — план самостоятельных тренировок.",
     "mediaType": "image",
-    "mediaSrc": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/ImagesTest/IMG_6007.JPEG",
+    "mediaSrc": "https://0f093848-5c2d-4e2f-978f-d726c7977145.selcdn.net/ImagesTest/IMG_6007.JPEG",
     "fallbackEmoji": "🏋️",
     "fallbackGradient": "linear-gradient(135deg, #1a0a0a, #E8192C)",
     "size": "tall"
@@ -250,7 +250,7 @@
     "desc": "Программа для коррекции фигуры и формирования идеальных пропорций.",
     "fullDesc": "Программа «90-60-90» — это комплексный подход к коррекции фигуры, включающий силовые тренировки, кардио-блоки и работу с проблемными зонами. Занятия 3 раза в неделю в мини-группах до 8 человек. Тренер адаптирует нагрузку под каждого участника. Включает консультацию по питанию.",
     "mediaType": "image",
-    "mediaSrc": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/ImagesTest/Generated%20Image%20February%2002%2C%202026%20-%204_02PM.png",
+    "mediaSrc": "https://0f093848-5c2d-4e2f-978f-d726c7977145.selcdn.net/ImagesTest/Generated%20Image%20February%2002%2C%202026%20-%204_02PM.png",
     "fallbackEmoji": "✨",
     "fallbackGradient": "linear-gradient(135deg, #6d1b7b, #E8192C)",
     "size": "normal"
@@ -263,7 +263,7 @@
     "desc": "Корпоративные тренировки для команд — объедините коллег общей целью и улучшите здоровье всей команды.",
     "fullDesc": "Корпоративные мини-группы — отличный способ поддержать здоровье сотрудников и укрепить командный дух. Мы формируем группы от 4 человек, составляем гибкое расписание под рабочий день и предлагаем специальные корпоративные тарифы. Доступны утренние, обеденные и вечерние слоты.",
     "mediaType": "image",
-    "mediaSrc": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/ImagesTest/DSC04830.jpg",
+    "mediaSrc": "https://0f093848-5c2d-4e2f-978f-d726c7977145.selcdn.net/ImagesTest/DSC04830.jpg",
     "fallbackEmoji": "🤝",
     "fallbackGradient": "linear-gradient(135deg, #1a1a2e, #2d2d5e)",
     "size": "normal"
@@ -276,7 +276,7 @@
     "desc": "Гибкие абонементы на тренажёрный зал — выберите формат, который подходит именно вам.",
     "fullDesc": "Мы предлагаем несколько форматов абонементов: на месяц, квартал или год. Все абонементы включают неограниченный доступ в тренажёрный зал в рабочие часы, бесплатный вводный инструктаж и консультацию по составлению программы тренировок. Заморозка абонемента по медицинским показаниям — бесплатно.",
     "mediaType": "image",
-    "mediaSrc": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/ImagesTest/photo_5289729825843573966_y.jpg",
+    "mediaSrc": "https://0f093848-5c2d-4e2f-978f-d726c7977145.selcdn.net/ImagesTest/photo_5289729825843573966_y.jpg",
     "fallbackEmoji": "🎫",
     "fallbackGradient": "linear-gradient(135deg, #1a0a0a, #7f0000)",
     "size": "wide"
@@ -289,7 +289,7 @@
     "desc": "45 минут функциональных высокоинтенсивных тренировок — сжигай калории и строй тело мечты.",
     "fullDesc": "F-45 — это 45-минутный класс функционального тренинга, объединяющий элементы кардио, силовых и интервальных упражнений. Каждая тренировка уникальна: меняются упражнения, оборудование и интенсивность. Подходит для любого уровня подготовки. Тренировки проходят ежедневно в нескольких временных слотах.",
     "mediaType": "image",
-    "mediaSrc": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/ImagesTest/DSC05048.jpg",
+    "mediaSrc": "https://0f093848-5c2d-4e2f-978f-d726c7977145.selcdn.net/ImagesTest/DSC05048.jpg",
     "fallbackEmoji": "🔥",
     "fallbackGradient": "linear-gradient(135deg, #7f0000, #E8192C)",
     "size": "normal"
@@ -302,7 +302,7 @@
     "desc": "Специальная программа для профилактики и коррекции проблем с позвоночником.",
     "fullDesc": "«Здоровая спина» — занятия, разработанные совместно с врачами-реабилитологами для укрепления мышечного корсета, улучшения осанки и снятия болей в спине. Подходит при остеохондрозе, сколиозе и сидячем образе жизни. Группы до 10 человек, занятия 2 раза в неделю по 55 минут.",
     "mediaType": "image",
-    "mediaSrc": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/ImagesTest/Generated%20Image%20January%2020%2C%202026%20-%202_42PM.png",
+    "mediaSrc": "https://0f093848-5c2d-4e2f-978f-d726c7977145.selcdn.net/ImagesTest/Generated%20Image%20January%2020%2C%202026%20-%202_42PM.png",
     "fallbackEmoji": "🦴",
     "fallbackGradient": "linear-gradient(135deg, #2d6a4f, #52b788)",
     "size": "tall"
@@ -315,7 +315,7 @@
     "desc": "Мягкие и эффективные упражнения для общего оздоровления тела — для всех возрастов.",
     "fullDesc": "Оздоровительная гимнастика — это комплекс упражнений для развития гибкости, координации и общего тонуса организма. Программа безопасна для людей с различными ограничениями здоровья. Занятия проходят 3 раза в неделю в комфортном темпе. Идеально подходит для тех, кто хочет начать активный образ жизни без лишней нагрузки.",
     "mediaType": "image",
-    "mediaSrc": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/ImagesTest/e9Vh4BEhUzl1UIS1daRm9GkcXUJaK6uISKYyWLaAq4oN42S8HYF9ZJl-PY-btKkIeIfs4zbt-9BPfl3d2227Uiix.jpg",
+    "mediaSrc": "https://0f093848-5c2d-4e2f-978f-d726c7977145.selcdn.net/ImagesTest/e9Vh4BEhUzl1UIS1daRm9GkcXUJaK6uISKYyWLaAq4oN42S8HYF9ZJl-PY-btKkIeIfs4zbt-9BPfl3d2227Uiix.jpg",
     "fallbackEmoji": "🌿",
     "fallbackGradient": "linear-gradient(135deg, #1b4332, #40916c)",
     "size": "normal"
@@ -328,7 +328,7 @@
     "desc": "Тренировка всего тела за одно занятие — комплексная проработка каждой мышечной группы.",
     "fullDesc": "Whole Body — это сбалансированная тренировка, охватывающая все мышечные группы в одном занятии. Сочетание силовых блоков и кардио позволяет эффективно сжигать жир и строить мышцы одновременно. Занятия длятся 55 минут и подходят для любого уровня подготовки. Тренировки проходят 3 раза в неделю.",
     "mediaType": "image",
-    "mediaSrc": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/ImagesTest/df_6xnXpcKNbOuxGEv_IJ2zkEGrpEyVD18l1b9j5XJM8y6PSpoYerMNDoDunC8s.jpg",
+    "mediaSrc": "https://0f093848-5c2d-4e2f-978f-d726c7977145.selcdn.net/ImagesTest/df_6xnXpcKNbOuxGEv_IJ2zkEGrpEyVD18l1b9j5XJM8y6PSpoYerMNDoDunC8s.jpg",
     "fallbackEmoji": "💥",
     "fallbackGradient": "linear-gradient(135deg, #7b2d8b, #E8192C)",
     "size": "normal"
@@ -341,7 +341,7 @@
     "desc": "Интенсивная проработка нижней части тела — для упругих ягодиц и стройных ног.",
     "fullDesc": "Класс «Ягодицы + Ноги» — один из самых популярных в нашем расписании. За 50 минут вы прорабатываете квадрицепс, бицепс бедра, ягодичные мышцы и икры с помощью штанги, гантелей и резиновых лент. Тренировки проходят 2 раза в неделю, подходят для любого уровня, нагрузку можно регулировать.",
     "mediaType": "image",
-    "mediaSrc": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/ImagesTest/IMG_6007.JPEG",
+    "mediaSrc": "https://0f093848-5c2d-4e2f-978f-d726c7977145.selcdn.net/ImagesTest/IMG_6007.JPEG",
     "fallbackEmoji": "🍑",
     "fallbackGradient": "linear-gradient(135deg, #6d1b7b, #c77dff)",
     "size": "normal"
@@ -354,7 +354,7 @@
     "desc": "Укрепление кора и мышц спины — осанка, рельеф и защита от болей.",
     "fullDesc": "Тренировка «Спина + Пресс» направлена на укрепление глубоких мышц кора, прямой и косых мышц живота, а также широчайших и разгибателей спины. Правильная техника и грамотная нагрузка помогут улучшить осанку, убрать живот и снизить риск травм. Занятия 2 раза в неделю по 50 минут.",
     "mediaType": "image",
-    "mediaSrc": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/ImagesTest/Generated%20Image%20February%2010%2C%202026%20-%203_43PM.png",
+    "mediaSrc": "https://0f093848-5c2d-4e2f-978f-d726c7977145.selcdn.net/ImagesTest/Generated%20Image%20February%2010%2C%202026%20-%203_43PM.png",
     "fallbackEmoji": "🎯",
     "fallbackGradient": "linear-gradient(135deg, #1a1a2e, #4a4ae8)",
     "size": "tall"
@@ -367,7 +367,7 @@
     "desc": "Грация балета + эффективность фитнеса: изящный способ стать стройнее и гибче.",
     "fullDesc": "Body Ballet — авторская программа, объединяющая элементы классического балета с современным фитнесом. Упражнения у станка и на коврике развивают гибкость, координацию и пластику, прорабатывают мышцы-стабилизаторы и создают вытянутый силуэт. Занятия доступны для начинающих без хореографического опыта.",
     "mediaType": "image",
-    "mediaSrc": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/ImagesTest/DSC04830.jpg",
+    "mediaSrc": "https://0f093848-5c2d-4e2f-978f-d726c7977145.selcdn.net/ImagesTest/DSC04830.jpg",
     "fallbackEmoji": "🩰",
     "fallbackGradient": "linear-gradient(135deg, #4a1942, #c77dff)",
     "size": "normal"
@@ -380,7 +380,7 @@
     "desc": "Персональные тренировки с тренером по фитнесу — программа под ваши цели и возможности.",
     "fullDesc": "Индивидуальный фитнес — это тренировки один на один с вашим персональным тренером. Первое занятие включает фитнес-тестирование и постановку целей. Программа составляется и корректируется под ваш прогресс. Доступны занятия в тренажёрном зале, фитнес-студии и зале групповых программ. Продолжительность — 55 минут.",
     "mediaType": "image",
-    "mediaSrc": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/ImagesTest/DSC05048.jpg",
+    "mediaSrc": "https://0f093848-5c2d-4e2f-978f-d726c7977145.selcdn.net/ImagesTest/DSC05048.jpg",
     "fallbackEmoji": "💪",
     "fallbackGradient": "linear-gradient(135deg, #7f0000, #E8192C)",
     "size": "normal"
@@ -393,7 +393,7 @@
     "desc": "Тренируйтесь вдвоём — с другом, партнёром или коллегой. Веселее, дешевле, эффективнее.",
     "fullDesc": "Парные тренировки по фитнесу — отличный способ совместить общение и спорт. Тренер работает с двумя участниками одновременно, адаптируя нагрузку для каждого. Стоимость на 30% ниже индивидуальных занятий. Особенно популярны среди пар, друзей и коллег. Запись на пробное занятие — бесплатно.",
     "mediaType": "image",
-    "mediaSrc": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/ImagesTest/photo_5289729825843573966_y.jpg",
+    "mediaSrc": "https://0f093848-5c2d-4e2f-978f-d726c7977145.selcdn.net/ImagesTest/photo_5289729825843573966_y.jpg",
     "fallbackEmoji": "👫",
     "fallbackGradient": "linear-gradient(135deg, #6d1b7b, #E8192C)",
     "size": "wide"
@@ -409,9 +409,9 @@
     "fallbackEmoji": "🎬",
     "fallbackGradient": "linear-gradient(135deg, #0d0d0d, #333)",
     "size": "tall",
-    "previewImage": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/ImagesTest/1234.png",
-    "previewVideo": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/PreviewVideo/previewN.mp4",
-    "fullVideo": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/video/0206%20(2).mp4"
+    "previewImage": "https://0f093848-5c2d-4e2f-978f-d726c7977145.selcdn.net/ImagesTest/1234.png",
+    "previewVideo": "https://0f093848-5c2d-4e2f-978f-d726c7977145.selcdn.net/PreviewVideo/previewN.mp4",
+    "fullVideo": "https://0f093848-5c2d-4e2f-978f-d726c7977145.selcdn.net/video/0206%20(2).mp4"
   },
   {
     "id": 36,
@@ -424,9 +424,9 @@
     "fallbackEmoji": "🎬",
     "fallbackGradient": "linear-gradient(135deg, #0d0d0d, #333)",
     "size": "tall",
-    "previewImage": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/Images/PreviwImgNeKak.png",
-    "previewVideo": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/PreviewVideo/0605%20(2)(1).mp4",
-    "fullVideo": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/video/FullNeKak.mp4"
+    "previewImage": "https://0f093848-5c2d-4e2f-978f-d726c7977145.selcdn.net/Images/PreviwImgNeKak.png",
+    "previewVideo": "https://0f093848-5c2d-4e2f-978f-d726c7977145.selcdn.net/PreviewVideo/0605%20(2)(1).mp4",
+    "fullVideo": "https://0f093848-5c2d-4e2f-978f-d726c7977145.selcdn.net/video/FullNeKak.mp4"
   },
   {
     "id": 37,
@@ -439,8 +439,8 @@
     "fallbackEmoji": "🎬",
     "fallbackGradient": "linear-gradient(135deg, #0d0d0d, #333)",
     "size": "tall",
-    "previewImage": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/Images/PreviwImgBasstest.png",
-    "previewVideo": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/PreviewVideo/0512-%D0%BA%D0%BE%D0%BF%D0%B8%D1%8F.mp4",
-    "fullVideo": "https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/video/FullBasstest.mp4"
+    "previewImage": "https://0f093848-5c2d-4e2f-978f-d726c7977145.selcdn.net/Images/PreviwImgBasstest.png",
+    "previewVideo": "https://0f093848-5c2d-4e2f-978f-d726c7977145.selcdn.net/PreviewVideo/0512-%D0%BA%D0%BE%D0%BF%D0%B8%D1%8F.mp4",
+    "fullVideo": "https://0f093848-5c2d-4e2f-978f-d726c7977145.selcdn.net/video/FullBasstest.mp4"
   }
 ]
