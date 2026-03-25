@@ -724,7 +724,7 @@ function openDetail(id) {
 // ═══════════════════════════════════════════════════════
 async function loadCards() {
   try {
-    var res = await fetch('https://0f093848-5c2d-4e2f-978f-d726c7977145.selcdn.net/cards.json');
+    var res = await fetch('https://02369308-20f2-403b-9d43-e4f5d2b3e445.selstorage.ru/cards.json');
     if (!res.ok) throw new Error('HTTP ' + res.status);
     allCards = await res.json();
   } catch (err) {
