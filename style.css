@@ -650,10 +650,14 @@ body {
 /* Full-width widget wrapper — no border, no padding, clean background */
 .widget-container {
   width: 100%;
-  background: var(--bg-secondary);
+  background: transparent;
   border-radius: var(--radius-card);
-  overflow: hidden;
-  min-height: 300px;
+  overflow: visible;
+}
+
+/* The inner widget div — let it size itself naturally */
+.widget-container > div {
+  min-height: 0;
 }
 
 /* Placeholder shown while widget loads or on О нас page */
