@@ -623,6 +623,11 @@ function buildDetailChrome(card, content) {
   var hero = document.createElement('div');
   hero.className = 'detail-hero ' + (isVideo ? 'detail-hero--video' : 'detail-hero--image');
 
+  // For image cards stamp the size as a modifier so CSS can set the right aspect-ratio
+  if (!isVideo && card.size) {
+    hero.classList.add('detail-hero--image-' + card.size); // e.g. detail-hero--image-tall
+  }
+
   // Media element (image or video)
   var mediaWrap = document.createElement('div');
   mediaWrap.className = 'detail-media';
@@ -633,7 +638,6 @@ function buildDetailChrome(card, content) {
     fb.className = 'card-media-fallback';
     fb.style.cssText = 'min-height:220px;display:flex;align-items:center;justify-content:center;font-size:4rem;';
     fb.textContent = card.fallbackEmoji;
-    // Insert fallback before scrim
     var scrim = hero.querySelector('.detail-hero__scrim');
     hero.insertBefore(fb, scrim);
     mediaWrap.remove();
@@ -660,7 +664,6 @@ function buildDetailChrome(card, content) {
       img.onerror = fallback;
       mediaWrap.appendChild(img);
     } else {
-      // Will show fallback via the function above — but we need mediaWrap in DOM first
       setTimeout(fallback, 0);
     }
   } else {
@@ -672,7 +675,7 @@ function buildDetailChrome(card, content) {
   }
   hero.appendChild(mediaWrap);
 
-  // Scrim with category + title overlaid
+  // Scrim with category badge + title overlaid on image
   var scrim = document.createElement('div');
   scrim.className = 'detail-hero__scrim';
 
@@ -801,23 +804,22 @@ async function loadCards() {
 //  COOKIE CONSENT BANNER
 // ═══════════════════════════════════════════════════════
 function initCookieBanner() {
-  const STORAGE_KEY = 'sprtk-cookie-consent';
-
-  // Already answered — don't show the banner
-  if (localStorage.getItem(STORAGE_KEY)) return;
-
-  const banner = document.getElementById('cookieBanner');
+  var STORAGE_KEY = 'sprtk-cookie-consent';
+  var banner = document.getElementById('cookieBanner');
   if (!banner) return;
 
-  function dismiss(choice) {
-    localStorage.setItem(STORAGE_KEY, choice);
-    banner.classList.add('cookie-banner--hidden');
-    // Remove from DOM after the slide-out animation finishes
-    banner.addEventListener('animationend', () => banner.remove(), { once: true });
+  // Already consented — hide immediately before it ever paints
+  if (localStorage.getItem(STORAGE_KEY)) {
+    banner.style.display = 'none';
+    return;
   }
 
-  document.getElementById('cookieAccept').addEventListener('click', () => dismiss('accepted'));
-  document.getElementById('cookieDecline').addEventListener('click', () => dismiss('declined'));
+  document.getElementById('cookieAccept').addEventListener('click', function() {
+    localStorage.setItem(STORAGE_KEY, 'accepted');
+    banner.classList.add('cookie-banner--hiding');
+    // Wait for CSS transition, then fully remove from layout
+    setTimeout(function() { banner.style.display = 'none'; }, 400);
+  });
 }
 
 // ═══════════════════════════════════════════════════════
@@ -877,7 +879,6 @@ function init() {
 
   loadCards();
 
-  // Cookie consent banner
   initCookieBanner();
 }
 
