@@ -615,8 +615,7 @@ body {
   margin: 0;
 }
 
-/* Light theme */
-[data-theme="light"] .detail-hero--image { background: #d4d4dc; }
+/* Light theme — video player dark background preserved */
 [data-theme="light"] .detail-hero--video .detail-media { background: #1a1a22; }
 
 .detail-desc {
@@ -824,21 +823,16 @@ body::after {
   line-height: 1.15;
 }
 
-.detail-content h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); margin: 32px 0 14px; }
-.detail-content h2 { font-size: clamp(1.25rem, 3vw, 1.9rem); margin: 32px 0 12px; }
-.detail-content h3 { font-size: clamp(1.05rem, 2.5vw, 1.4rem); margin: 24px 0 10px; }
-.detail-content h4 { font-size: 1rem; margin: 20px 0 8px; }
+.detail-content__inner h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); margin: 32px 0 14px; }
+.detail-content__inner h2 { font-size: clamp(1.25rem, 3vw, 1.9rem); margin: 32px 0 12px; }
+.detail-content__inner h3 { font-size: clamp(1.05rem, 2.5vw, 1.4rem); margin: 24px 0 10px; }
+.detail-content__inner h4 { font-size: 1rem; margin: 20px 0 8px; }
 
 /* Subtle left border accent on h2 section headings (not a bar above) */
 .detail-content__inner h2 {
   padding-left: 14px;
   border-left: 2.5px solid var(--accent);
   color: var(--text-primary);
-}
-
-/* No border on the hidden first h2 */
-.detail-content__inner > h2:first-child {
-  display: none;
 }
 
 .detail-content p,
@@ -942,9 +936,9 @@ body::after {
   margin: 28px 0;
 }
 
-/* ---- Images and video inside loaded content ---- */
-.detail-content img,
-.detail-content video {
+/* ---- Images and video inside loaded content (NOT the hero) ---- */
+.detail-content__inner img,
+.detail-content__inner video {
   max-width: 100%;
   height: auto;
   border-radius: var(--radius-card);
