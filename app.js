@@ -21,6 +21,66 @@ let filteredSource  = [];   // full ordered array for current filter
 let renderedCount   = 0;    // how many items from filteredSource are in the DOM
 let prefetchedBatch = null; // pre-built data array, ready to render instantly
 
+// ═══════════════════════════════════════════════════════
+//  LAZY WIDGET CONFIG
+//  Each entry matches a page id → the <script> attributes
+//  that Mobifitness needs. The script is injected only once,
+//  the first time the user navigates to that page.
+// ═══════════════════════════════════════════════════════
+const WIDGET_CONFIG = {
+  schedule: {
+    id:       'mobifitness_personal_widget_script_exl',
+    div:      'mf_schedule_widget_cont_exl',
+    type:     'schedule',
+    code:     '667017',
+    club:     null,
+  },
+  shop: {
+    id:       'mobifitness_personal_widget_script_859',
+    div:      'mf_shop_widget_cont_859',
+    type:     'shop',
+    code:     '667017',
+    club:     '6009',
+  },
+  training: {
+    id:       'mobifitness_personal_widget_script_8gd',
+    div:      'mf_personalBook_widget_cont_8gd',
+    type:     'personalBook',
+    code:     '667017',
+    club:     null,
+  },
+  account: {
+    id:       'mobifitness_personal_widget_script_tnl',
+    div:      'mf_personal_widget_cont_tnl',
+    type:     'personal',
+    code:     '667017',
+    club:     null,
+  },
+};
+
+function loadWidgetIfNeeded(pageId) {
+  var cfg = WIDGET_CONFIG[pageId];
+  if (!cfg) return;                              // page has no widget
+  if (document.getElementById(cfg.id)) return;  // already injected
+
+  var s = document.createElement('script');
+  s.type  = 'text/javascript';
+  s.async = true;
+  s.id    = cfg.id;
+  s.src   = '//mobifitness.ru/personal-widget/js/code.js';
+  s.setAttribute('data-div',      cfg.div);
+  s.setAttribute('data-test',     '0');
+  s.setAttribute('data-debug',    '0');
+  s.setAttribute('data-domain',   'mobifitness.ru');
+  s.setAttribute('data-code',     cfg.code);
+  s.setAttribute('data-version',  'v6');
+  s.setAttribute('data-type',     cfg.type);
+  s.setAttribute('data-language', '');
+  if (cfg.club) s.setAttribute('data-club', cfg.club);
+
+  document.body.appendChild(s);
+}
+
 let autoplayObserver = null;
 let sentinelObserver = null;
 let prefetchObserver = null;
@@ -73,6 +133,9 @@ function navigateTo(pageId, pushHistory) {
   const tab  = document.querySelector('.nav-tab[data-page="' + pageId + '"]');
   if (page) page.classList.add('active');
   if (tab)  tab.classList.add('active');
+
+  // Lazy-load the third-party widget for this page (no-op if already loaded)
+  loadWidgetIfNeeded(pageId);
 
   // History API
   if (pushHistory) {
