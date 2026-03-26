@@ -3,7 +3,7 @@
 // ═══════════════════════════════════════════════════════
 //  CONFIGURATION
 // ═══════════════════════════════════════════════════════
-const BATCH_SIZE         = 20;   // cards per render batch
+const BATCH_SIZE         = 10;   // cards per render batch
 const PREFETCH_AHEAD     = 5;    // start prefetch when last N cards become visible
 const DOM_MAX            = 50;   // target maximum live card nodes
 const DOM_TRIM_AFTER     = 60;   // trim when DOM card count exceeds this
