@@ -689,14 +689,6 @@ function buildDetailChrome(card, content) {
   title.textContent = card.title;
   scrim.appendChild(title);
 
-  // For image cards: add the short description as a subtitle below the title
-  if (!isVideo && card.desc) {
-    var sub = document.createElement('p');
-    sub.className   = 'detail-hero__desc';
-    sub.textContent = card.desc;
-    scrim.appendChild(sub);
-  }
-
   hero.appendChild(scrim);
   content.appendChild(hero);
 }
@@ -806,6 +798,29 @@ async function loadCards() {
 }
 
 // ═══════════════════════════════════════════════════════
+//  COOKIE CONSENT BANNER
+// ═══════════════════════════════════════════════════════
+function initCookieBanner() {
+  const STORAGE_KEY = 'sprtk-cookie-consent';
+
+  // Already answered — don't show the banner
+  if (localStorage.getItem(STORAGE_KEY)) return;
+
+  const banner = document.getElementById('cookieBanner');
+  if (!banner) return;
+
+  function dismiss(choice) {
+    localStorage.setItem(STORAGE_KEY, choice);
+    banner.classList.add('cookie-banner--hidden');
+    // Remove from DOM after the slide-out animation finishes
+    banner.addEventListener('animationend', () => banner.remove(), { once: true });
+  }
+
+  document.getElementById('cookieAccept').addEventListener('click', () => dismiss('accepted'));
+  document.getElementById('cookieDecline').addEventListener('click', () => dismiss('declined'));
+}
+
+// ═══════════════════════════════════════════════════════
 //  INIT
 // ═══════════════════════════════════════════════════════
 function init() {
@@ -861,6 +876,9 @@ function init() {
   resizeObs.observe(document.getElementById('cardsGrid'));
 
   loadCards();
+
+  // Cookie consent banner
+  initCookieBanner();
 }
 
 document.addEventListener('DOMContentLoaded', init);
