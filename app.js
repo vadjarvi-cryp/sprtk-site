@@ -689,6 +689,14 @@ function buildDetailChrome(card, content) {
   title.textContent = card.title;
   scrim.appendChild(title);
 
+  // For image cards: add the short description as a subtitle below the title
+  if (!isVideo && card.desc) {
+    var sub = document.createElement('p');
+    sub.className   = 'detail-hero__desc';
+    sub.textContent = card.desc;
+    scrim.appendChild(sub);
+  }
+
   hero.appendChild(scrim);
   content.appendChild(hero);
 }
