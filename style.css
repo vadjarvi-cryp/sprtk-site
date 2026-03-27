@@ -798,7 +798,6 @@ body::after {
 /* ---- Outer container (already in HTML as #detailContent) ---- */
 .detail-content {
   padding-bottom: 60px;
-  padding-top: 60px;
 }
 
 /* ---- Inner wrapper for loaded / injected HTML ---- */
