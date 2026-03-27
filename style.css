@@ -804,7 +804,7 @@ body::after {
 .detail-content__inner {
   max-width: 800px;
   margin: 0 auto;
-  padding: 0 0 40px;
+  padding: 40px 0 40px;
 }
 
 /* Hide the first h2 in injected content — it duplicates the hero title */
