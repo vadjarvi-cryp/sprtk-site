@@ -63,6 +63,38 @@ function loadWidgetIfNeeded(pageId) {
   if (!cfg) return;                              // page has no widget
   if (document.getElementById(cfg.id)) return;  // already injected
 
+  // Show skeleton immediately so there's no empty-space flash
+  var targetDiv = document.getElementById(cfg.div);
+  if (targetDiv) {
+    var skeleton = document.createElement('div');
+    skeleton.className = 'widget-skeleton';
+    skeleton.id = cfg.div + '_skeleton';
+    skeleton.innerHTML =
+      '<div class="widget-skeleton__bar" style="width:40%;margin-bottom:8px"></div>' +
+      '<div class="widget-skeleton__bar" style="width:65%;margin-bottom:24px"></div>' +
+      '<div class="widget-skeleton__row">' +
+        '<div class="widget-skeleton__card"></div>' +
+        '<div class="widget-skeleton__card"></div>' +
+        '<div class="widget-skeleton__card"></div>' +
+      '</div>' +
+      '<div class="widget-skeleton__bar" style="width:100%;margin-top:20px"></div>' +
+      '<div class="widget-skeleton__bar" style="width:100%;margin-top:12px"></div>' +
+      '<div class="widget-skeleton__bar" style="width:80%;margin-top:12px"></div>';
+    targetDiv.appendChild(skeleton);
+
+    // Watch for the widget inserting its own content, then remove skeleton
+    var observer = new MutationObserver(function(mutations, obs) {
+      var hasWidgetContent = Array.from(targetDiv.children).some(function(el) {
+        return el !== skeleton;
+      });
+      if (hasWidgetContent) {
+        skeleton.remove();
+        obs.disconnect();
+      }
+    });
+    observer.observe(targetDiv, { childList: true, subtree: false });
+  }
+
   var s = document.createElement('script');
   s.type  = 'text/javascript';
   s.async = true;
@@ -623,9 +655,9 @@ function buildDetailChrome(card, content) {
   var hero = document.createElement('div');
   hero.className = 'detail-hero ' + (isVideo ? 'detail-hero--video' : 'detail-hero--image');
 
-  // For image cards stamp the size as a modifier so CSS can set the right aspect-ratio
-  if (!isVideo && card.size) {
-    hero.classList.add('detail-hero--image-' + card.size); // e.g. detail-hero--image-tall
+  // Stamp size modifier so CSS picks the right aspect-ratio
+  if (card.size) {
+    hero.classList.add(isVideo ? 'detail-hero--video-' + card.size : 'detail-hero--image-' + card.size);
   }
 
   // Media element (image or video)
