@@ -340,8 +340,6 @@ body {
   transition: transform var(--transition), box-shadow var(--transition),
               background var(--transition), outline-color var(--transition);
   animation: cardIn 0.35s ease both;
-  /* Fixed width for the accent stripe */
-  border-left: 4px solid var(--accent);
 }
 
 /* Gradient border on hover — painted as a pseudo-element behind the card.
@@ -447,7 +445,7 @@ body {
   content: '';
   display: block;
   height: 1.5px;
-  width: 100%;
+  width: 48px; /* Fixed width instead of 100% */
   margin-bottom: 10px;
   background: linear-gradient(90deg, var(--accent) 0%, rgba(232,25,44,0.18) 60%, transparent 100%);
   border-radius: 1px;
@@ -509,7 +507,7 @@ body {
   width: 100%;
   border-radius: var(--radius-card);
   overflow: hidden;
-  background: #0d0d10;
+  background: transparent; /* Transparent instead of dark background */
 }
 
 /* Image cards: aspect-ratio driven by the card's size field — no empty space, no cropping */
@@ -541,6 +539,7 @@ body {
      metadata hasn't arrived yet. 16/9 covers most landscape videos.
      Portrait cards get 9/16 via the size modifier below. */
   aspect-ratio: 16 / 9;
+  min-height: 400px; /* Ensure container has proper height before video loads */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -548,6 +547,7 @@ body {
 .detail-hero--video-tall .detail-media { 
   aspect-ratio: auto; /* Remove fixed aspect ratio for vertical videos */
   max-height: 80vh; /* Prevent full-page height */
+  min-height: 500px; /* Ensure proper height before video loads */
   height: auto;
 }
 
@@ -556,6 +556,16 @@ body {
   height: auto;
   width: auto;
   max-width: 100%;
+}
+
+/* Responsive adjustments for video loading state */
+@media (max-width: 768px) {
+  .detail-hero--video .detail-media {
+    min-height: 280px;
+  }
+  .detail-hero--video-tall .detail-media {
+    min-height: 400px;
+  }
 }
 
 .detail-hero--video .detail-media video {
@@ -568,7 +578,7 @@ body {
 /* Title block sits below the video, not overlaid */
 .detail-hero--video .detail-hero__scrim {
   position: static;
-  background: none;
+  background: transparent; /* Ensure no background in any theme */
   padding: 20px 4px 0;
   pointer-events: auto;
 }
@@ -582,6 +592,11 @@ body {
 .detail-hero--video .detail-category {
   background: var(--accent);
   color: #fff;
+}
+
+/* Ensure detail-hero--video doesn't have conflicting background */
+.detail-hero--video {
+  background: transparent;
 }
 
 /* Fallback (emoji) */
