@@ -164,7 +164,7 @@ body {
   background: var(--toggle-bg);
   border: 1px solid var(--toggle-border);
   border-radius: 50px;
-  padding: 6px 12px;
+  padding: 6px 6px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -445,7 +445,7 @@ body {
   content: '';
   display: block;
   height: 1.5px;
-  width: 48px; /* Fixed width instead of 100% */
+  width: 48%; 
   margin-bottom: 10px;
   background: linear-gradient(90deg, var(--accent) 0%, rgba(232,25,44,0.18) 60%, transparent 100%);
   border-radius: 1px;
@@ -545,7 +545,7 @@ body {
   justify-content: center;
 }
 .detail-hero--video-tall .detail-media { 
-  aspect-ratio: auto; /* Remove fixed aspect ratio for vertical videos */
+  aspect-ratio: 9 / 16; /* Remove fixed aspect ratio for vertical videos */
   max-height: 80vh; /* Prevent full-page height */
   min-height: 500px; /* Ensure proper height before video loads */
   height: auto;
